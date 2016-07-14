@@ -34,16 +34,6 @@ public class MapParsing {
 	private int imageCount;
 	private String BlogNumber;
 	private BlogDto blogDto;
-	
-	private BlogImgInfoDto blogImgInfoDto;
-
-	public BlogImgInfoDto getBlogImgInfoDto() {
-		return blogImgInfoDto;
-	}
-
-	public void setBlogImgInfoDto(BlogImgInfoDto blogImgInfoDto) {
-		this.blogImgInfoDto = blogImgInfoDto;
-	}
 
 	public BlogDto getBlogDto() {
 		return blogDto;
@@ -90,10 +80,13 @@ public class MapParsing {
 		
 		String url = "http://blog.naver.com/"+blogId+"/"+blogNumber;
 		blogDto.setUrl(url);
-		blogRankInfoDto.setBlogId(blogId);
-		blogRankInfoDto.setCommentCount(commentCount);
-		blogRankInfoDto.setLenthBody(lenthBody);
-		blogRankInfoDto.setImageCount(imageCount);
+		blogRankInfoDto.setUrl(url);
+		blogRankInfoDto.getBlogImgInfoDto().setUrl(url);
+		blogRankInfoDto.setBlog_writer_id(blogId);
+		
+		blogRankInfoDto.setComment_count(commentCount);
+		blogRankInfoDto.setBody_lenth(lenthBody);
+		blogRankInfoDto.setImage_count(imageCount);
 		blogDto.setBlog_number(blogNumber);
 		blogDto.setBlogRankInfoDto(blogRankInfoDto);
 		String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(mapParsing.getAddress()));
@@ -194,10 +187,12 @@ public class MapParsing {
 
 	public void setBlogCommnetCount(Document doc) {
 		Elements Contetns = doc.select("a._cmtList");
-		if (Contetns.size() > 0) {
-			Element Contetn = Contetns.get(0);
-			String commentCount = Contetn.text();
-			mapParsing.setCommentCount(mapParsing.getBlogComentCount(commentCount));
+		if(Contetns !=null){
+			if (Contetns.size() > 0) {
+				Element Contetn = Contetns.get(0);
+				String commentCount = Contetn.text();
+				mapParsing.setCommentCount(mapParsing.getBlogComentCount(commentCount));
+			}
 		}
 
 	}
@@ -259,24 +254,12 @@ public class MapParsing {
 				data = data.substring(data.indexOf("{"), data.indexOf("[") - 12);
 				data = data + "}";
 				data = data.replace("\\", "");
-				json = stringToJson(data);
+				json = StringMethod.getStringMethod().stringToJson(data);
 				title = json.get("title");
 				if (title != null) {
 					break;
 				}
 			}
-		}
-		return json;
-	}
-	public JSONObject stringToJson(String data) {
-		JSONObject json = new JSONObject();
-		Object obj = null;
-		try {
-			obj = JSONValue.parseWithException(data);
-			json = (JSONObject) obj;
-		} catch (ParseException e) {
-			System.out.println("String --> Json data :" + data);
-			e.printStackTrace();
 		}
 		return json;
 	}
@@ -294,7 +277,7 @@ public class MapParsing {
 			data = data.replace("&quot;", "\"");
 			data = data.substring(data.indexOf("{") + 1, data.lastIndexOf("}") + 1);
 			data = data.substring(data.indexOf("{"), data.lastIndexOf("}"));
-			json = stringToJson(data);
+			json = StringMethod.getStringMethod().stringToJson(data);
 			title = json.get("title");
 			if (title != null) {
 				break;

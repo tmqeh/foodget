@@ -17,6 +17,8 @@ import com.foodget.member.model.MemberDto;
 import com.foodget.store.api.JosuChangeApi;
 import com.foodget.store.api.NaverApi;
 import com.foodget.store.blog.model.BlogDto;
+import com.foodget.store.blog.model.BlogImgInfoDto;
+import com.foodget.store.blog.model.BlogRankInfoDto;
 import com.foodget.store.model.StoreDto;
 import com.foodget.util.parsing.MapParsing;
 import com.foodget.store.service.StoreService;
@@ -35,33 +37,46 @@ public class StoreController {
 	public ModelAndView store(@RequestParam("storeinfo")String storeinfo, @RequestParam("addresskeyword")String keyword) {
 //		System.out.println("storeinfo = " + storeinfo);
 		ModelAndView mav = new ModelAndView();
-		List<StoreDto> slist = storeService.StoreSaveAndLoad(storeinfo);
+		List<StoreDto> slist = new ArrayList<StoreDto>();
+		StringTokenizer st = new StringTokenizer(storeinfo, "|");
+		String content;
+		
+		StoreDto storeDto = null;
+		JSONObject json = new JSONObject();
+		for(int i = 0 ; i < 14 ; i++) {
+			storeDto = new StoreDto();
+			content = st.nextToken();
+			json = stringToJson(content);
+			storeDto.setStore_name(json.get("storeName")+"");
+			storeDto.setStore_address(json.get("storeAddress")+"");
+			storeDto.setStore_phone(json.get("storePhone")+"");
+			storeDto.setStore_latitude(Double.parseDouble(json.get("storeLatitude")+""));
+			storeDto.setStore_logitude(Double.parseDouble(json.get("storeLongitude")+""));
+			
+			storeService.insertStore(storeDto);			
+			storeDto = storeService.selectStore(storeDto);
+			slist.add(storeDto);
+		}
+		System.out.println("크기 : " + slist.size());
 		mav.addObject("slist", slist);
 		mav.setViewName("/search");
 		return mav;
 	}
 	
-	@RequestMapping(value="/storeInfo.html", method=RequestMethod.POST)
-	public ModelAndView storeInfo(@RequestParam("store_seq")int store_seq) {
-		ModelAndView mav = new ModelAndView();
-		StoreDto storeDto = storeService.selectStore(store_seq);
-		mav.addObject("storeInfo", storeDto);
-		mav.setViewName("/store/storeinfo");
-		return mav;
-	}
-	
 	@RequestMapping(value="/bloglist.html", method=RequestMethod.POST)
-	public ModelAndView blogList(@RequestParam("blogSearch") String blogSearch){
+	public ModelAndView blogList(@RequestParam("blogSearch") String blogSearch, @RequestParam("store_phone") String store_phone){
 		ModelAndView mav = new ModelAndView();
 		System.out.println("시작");
-		List<BlogDto> blogList = NaverApi.getNaverApi().blogInfo(blogSearch);
-	
+		List<BlogDto> blogList = NaverApi.getNaverApi().blogInfo(blogSearch,store_phone);
 		for(int i=0;i<blogList.size();i++){
 			BlogDto blogDto = new BlogDto();
 			blogDto = blogList.get(i);
+			BlogRankInfoDto	blogRankInfoDto = blogDto.getBlogRankInfoDto();
 			storeService.mergeBlog(blogDto);
+			storeService.insertBlogRank(blogRankInfoDto);
+			BlogImgInfoDto blogImgInfoDto = blogDto.getBlogRankInfoDto().getBlogImgInfoDto();
+			storeService.insertBlogImage(blogImgInfoDto);
 		}
-//		JosuChangeApi.getJosuChangeApi().ChangeToNewAddress(blogList);
 		System.out.println("끝");
 		mav.addObject("blogList", blogList);
 		mav.setViewName("/blogList");
@@ -77,4 +92,16 @@ public class StoreController {
 		mav.setViewName("/hojin_Test/viewImg");
 		return mav;
 	}
+	
+	public JSONObject stringToJson(String data) {
+	      JSONObject json = new JSONObject();
+	      Object obj = null;
+	      try {
+	         obj = JSONValue.parseWithException(data);
+	         json = (JSONObject) obj;
+	      } catch (ParseException e) {
+	         e.printStackTrace();
+	      }
+	      return json;
+	   }
 }

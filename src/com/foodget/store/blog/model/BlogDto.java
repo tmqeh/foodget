@@ -3,12 +3,27 @@ package com.foodget.store.blog.model;
 
 
 public class BlogDto {
+	@Override
+	public String toString() {
+		return "BlogDto [url=" + url + ", store_addres=" + store_addres + ", blog_number=" + blog_number
+				+ ", store_name=" + store_name + ", store_seq=" + store_seq + ", store_phone=" + store_phone
+				+ ", old_address=" + old_address + ", new_address=" + new_address + ", searchWord=" + searchWord
+				+ ", blogRankInfoDto=" + blogRankInfoDto.toString() + ", rank_score=" + rank_score + "]";
+	}
 	private String url;
 	private String store_addres;
 	private String blog_number;
 	private String store_name;
 	private int store_seq;
+	private String store_phone;
+	private String description;
 	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	private String old_address;
 	private String new_address;
 	
@@ -16,6 +31,12 @@ public class BlogDto {
 	private BlogRankInfoDto blogRankInfoDto;
 	private int rank_score;
 	
+	public String getStore_phone() {
+		return store_phone;
+	}
+	public void setStore_phone(String store_phone) {
+		this.store_phone = store_phone;
+	}
 	public int getStore_seq() {
 		return store_seq;
 	}

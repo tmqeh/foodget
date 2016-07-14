@@ -5,7 +5,7 @@ import java.util.List;
 public class BlogImgInfoDto extends BlogRankInfoDto{
 	
 	private List<String> imgSrcList;
-
+	
 	public List<String> getImgSrcList() {
 		return imgSrcList;
 	}
@@ -13,10 +13,9 @@ public class BlogImgInfoDto extends BlogRankInfoDto{
 	public void setImgSrcList(List<String> imgSrcList) {
 		this.imgSrcList = imgSrcList;
 	}
-
 	@Override
 	public String toString() {
-		return "BlogImgInfoDto [imgSrcList=" + imgSrcList + "]";
+		return "BlogImgInfoDto [url ="+getUrl()+"][imgSrcList=" + imgSrcList + "]";
 //		return "BlogImgInfoDto [imgSrcList=생략]";
 	}
 	

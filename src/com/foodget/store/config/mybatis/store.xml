@@ -3,7 +3,7 @@
 
 <mapper namespace="com.foodget.store.model.dao.StoreDaoImpl">
     
-<!--    <typeAlias alias="mdto" type="com.kitri.member.model.MemberDto"/>-->
+    <!--    <typeAlias alias="mdto" type="com.kitri.member.model.MemberDto"/>-->
     <!-- 현재 xml에서 사용됨 (지역변수같은 것)-->
     
     <select id="storeCheck" parameterType="sdto" resultType="int">
@@ -14,28 +14,44 @@
     </select>
     
     <insert id="storeInsert" parameterType="sdto">
-        insert into store (store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude)
-        values(store_seq.nextval, #{store_name}, #{store_address}, #{store_phone}, 0, 0, 0, 0, 0, 0, #{store_latitude}, #{store_longitude})
+        insert into store (store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_logitude)
+        values(store_seq.nextval, #{store_name}, #{store_address}, #{store_phone}, 0, 0, 0, 0, 0, 0, #{store_latitude}, #{store_logitude})
     </insert>
     
-    <select id="storeInfo" parameterType="sdto" resultType="sdto">
-        select store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude
-        from store
-        where store_seq = #{store_seq}
-    </select>
-    
     <select id="storeSearch" parameterType="String" resultType="sdto">
-        select store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude
+        select store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_logitude
         from store
         where store_name = #{store_name}
         and store_address = #{store_address}
     </select>
-    
-    <insert id ="mergeBlog" parameterType="blogdto">
-        insert into blog (URL,BLOG_NUMBER,OLD_ADDRESS,NEW_ADDRESS,RANK_SCORE,STORE_SEQ)	
-        values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, #{store_seq})
+    <update id ="mergeBlog" parameterType="blogdto">
+        MERGE INTO BLOG b
+        USING dual
+        on (b.URL = #{url} )
+        WHEN MATCHED THEN
+        UPDATE SET
+        b.STORE_PHONE = #{store_phone}
+        WHEN NOT MATCHED THEN
+        INSERT (b.URL,b.BLOG_NUMBER,b.OLD_ADDRESS,b.NEW_ADDRESS,b.RANK_SCORE,b.STORE_SEQ,b.description)
+        values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, 316,#{description})
+    </update>
+    <insert id="insertBlogRank" parameterType="blogrankdto">
+        MERGE INTO BLOG_RANK br
+        USING dual
+        on (br.URL = #{url} )
+        WHEN MATCHED THEN
+        UPDATE SET
+        br.COMMENT_COUNT = #{comment_count}
+        WHEN NOT MATCHED THEN
+        insert (URL, BLOG_WRITER_ID, COMMENT_COUNT, BODY_LENTH,IMAGE_COUNT)
+        values(#{url},#{blog_writer_id},#{comment_count},#{body_lenth},#{image_count})
     </insert>
-    
-    
-    
+    <insert id="insertBlogImage" parameterType="blogimgdto">
+        INSERT ALL
+        <foreach collection="imgSrcList" item="item" separator=" ">
+            INTO blog_image(URL, IMAGE_URL) VALUES 
+            (#{url, jdbcType=VARCHAR}, #{item, jdbcType=VARCHAR} )
+        </foreach>
+        SELECT * FROM DUAL
+    </insert>
 </mapper>

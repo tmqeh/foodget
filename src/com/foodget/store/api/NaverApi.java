@@ -35,8 +35,8 @@ public class NaverApi {
 		String clientId = "vFmv_WyXnF1xS_8ZmKoW";
 		String clientSecret = "GGraX8OAa8";
 		query = Encoder.eucUrl(query);
-		String url = "https://openapi.naver.com/v1/search/blog.xml?query=" + query + "&display=100&start=1&sort=sim";
-
+		int display=10;
+		String url = "https://openapi.naver.com/v1/search/blog.xml?query=" + query + "&display="+display+"&start=1&sort=sim";
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet req = new HttpGet(url);// reqest 占쏙옙체
 		req.addHeader("X-Naver-Client-Id", clientId);
@@ -79,21 +79,22 @@ public class NaverApi {
 			sb.append("<item><message>에러</message></item>");
 		}
 		xml = sb.toString();
-		
 		document = XmlParseDom.createDocument(xml);
 		return document;
 	}
-	public List<BlogDto> blogInfo(String query){
+	public List<BlogDto> blogInfo(String query, String store_phone){
 		MapParsing mapParsing = MapParsing.getMapParsing();
 		Document document = naverOpenApiSearchBlog(query);//블로그 검색
-		NodeList title =  XmlParseDom.getNodeList("//item/title", document);
+		NodeList description =  XmlParseDom.getNodeList("//item/description", document);
 		NodeList col2 =  XmlParseDom.getNodeList("//total", document);
 		NodeList link = XmlParseDom.getNodeList("//item/link", document);
 		List<BlogDto> blogList = new ArrayList<BlogDto>();
 		for (int i = 0; i < link.getLength(); i++) {
 			if(mapParsing.startParsing(link.item(i).getTextContent())){
 				BlogDto blogDto = new BlogDto();
+				blogDto.setDescription(description.item(i).getTextContent());
 				blogDto = MapParsing.getMapParsing().getBlogDto();
+				blogDto.setStore_phone(store_phone);
 				blogList.add(blogDto);
 			}
 		}
