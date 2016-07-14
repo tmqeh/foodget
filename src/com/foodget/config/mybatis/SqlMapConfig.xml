@@ -4,12 +4,15 @@
 <configuration>
     
     <properties resource="com/foodget/config/mybatis/dbinfo.properties"/>
-        
+    
     <typeAliases>
         <typeAlias alias="mdto" type="com.foodget.member.model.MemberDto"/>
         <typeAlias alias="sdto" type="com.foodget.store.model.StoreDto"/>
         <typeAlias alias="blogdto" type="com.foodget.store.blog.model.BlogDto"/>
         <typeAlias alias="list" type="java.util.List"/>
+        <typeAlias alias="blogrankdto" type="com.foodget.store.blog.model.BlogRankInfoDto"/>
+        <typeAlias alias="blogimgdto" type="com.foodget.store.blog.model.BlogImgInfoDto"/>
+        
     </typeAliases>        
     <environments default="development">
         <environment id="development">
