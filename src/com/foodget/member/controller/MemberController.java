@@ -79,7 +79,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/logout.html", method=RequestMethod.POST)
+	@RequestMapping(value="/logout.html", method=RequestMethod.GET)
 	public String logout(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "/index";

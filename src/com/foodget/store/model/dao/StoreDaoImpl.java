@@ -42,6 +42,11 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
+	public StoreDto selectStore(int store_seq) {
+		return sqlSession.selectOne("com.foodget.store.model.dao.StoreDaoImpl.storeInfo",store_seq);
+	}
+
+	@Override
 	public void insertBlogRank(BlogRankInfoDto blogRankInfoDto) {
 		sqlSession.insert("com.foodget.store.model.dao.StoreDaoImpl.insertBlogRank", blogRankInfoDto);	
 	}

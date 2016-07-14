@@ -33,33 +33,12 @@ public class StoreController {
 		this.storeService = storeService;
 	}
 
-	@RequestMapping(value="/storeinsert.html", method=RequestMethod.POST)
-	public ModelAndView store(@RequestParam("storeinfo")String storeinfo, @RequestParam("addresskeyword")String keyword) {
-//		System.out.println("storeinfo = " + storeinfo);
+	@RequestMapping(value="/storeInfo.html", method=RequestMethod.POST)
+	public ModelAndView storeInfo(@RequestParam("store_seq")int store_seq) {
 		ModelAndView mav = new ModelAndView();
-		List<StoreDto> slist = new ArrayList<StoreDto>();
-		StringTokenizer st = new StringTokenizer(storeinfo, "|");
-		String content;
-		
-		StoreDto storeDto = null;
-		JSONObject json = new JSONObject();
-		for(int i = 0 ; i < 14 ; i++) {
-			storeDto = new StoreDto();
-			content = st.nextToken();
-			json = stringToJson(content);
-			storeDto.setStore_name(json.get("storeName")+"");
-			storeDto.setStore_address(json.get("storeAddress")+"");
-			storeDto.setStore_phone(json.get("storePhone")+"");
-			storeDto.setStore_latitude(Double.parseDouble(json.get("storeLatitude")+""));
-			storeDto.setStore_logitude(Double.parseDouble(json.get("storeLongitude")+""));
-			
-			storeService.insertStore(storeDto);			
-			storeDto = storeService.selectStore(storeDto);
-			slist.add(storeDto);
-		}
-		System.out.println("크기 : " + slist.size());
-		mav.addObject("slist", slist);
-		mav.setViewName("/search");
+		StoreDto storeDto = storeService.selectStore(store_seq);
+		mav.addObject("storeInfo", storeDto);
+		mav.setViewName("/store/storeinfo");
 		return mav;
 	}
 	

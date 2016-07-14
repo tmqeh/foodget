@@ -12,6 +12,7 @@ public interface StoreDao {
 	public List<StoreDto> selectStoreList(String keyword);
 	public List<BlogDto> mergeBlog(BlogDto blogDto);
 	public StoreDto selectStore(StoreDto storeDto);
+	public StoreDto selectStore(int store_seq);
 	public void insertBlogRank(BlogRankInfoDto blogRankInfoDto);
 	public void insertBlogImage(BlogImgInfoDto blogImgInfoDto);
 }

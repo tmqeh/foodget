@@ -14,16 +14,23 @@
     </select>
     
     <insert id="storeInsert" parameterType="sdto">
-        insert into store (store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_logitude)
-        values(store_seq.nextval, #{store_name}, #{store_address}, #{store_phone}, 0, 0, 0, 0, 0, 0, #{store_latitude}, #{store_logitude})
+        insert into store (store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude)
+        values(store_seq.nextval, #{store_name}, #{store_address}, #{store_phone}, 0, 0, 0, 0, 0, 0, #{store_latitude}, #{store_longitude})
     </insert>
     
+    <select id="storeInfo" parameterType="sdto" resultType="sdto">
+        select store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude
+        from store
+        where store_seq = #{store_seq}
+    </select>
+    
     <select id="storeSearch" parameterType="String" resultType="sdto">
-        select store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_logitude
+        select store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude
         from store
         where store_name = #{store_name}
         and store_address = #{store_address}
     </select>
+    
     <update id ="mergeBlog" parameterType="blogdto">
         MERGE INTO BLOG b
         USING dual
