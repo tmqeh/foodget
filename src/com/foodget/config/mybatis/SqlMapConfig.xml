@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    
+    <properties resource="com/foodget/config/mybatis/dbinfo.properties"/>
+        
+    <typeAliases>
+        <typeAlias alias="mdto" type="com.foodget.member.model.MemberDto"/>
+        <typeAlias alias="sdto" type="com.foodget.store.model.StoreDto"/>
+        <typeAlias alias="blogdto" type="com.foodget.store.blog.model.BlogDto"/>
+        <typeAlias alias="list" type="java.util.List"/>
+    </typeAliases>        
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <mappers>
+        <mapper resource="com/foodget/member/config/mybatis/member.xml"/>
+        <mapper resource="com/foodget/member/config/mybatis/login.xml"/>        
+        <mapper resource="com/foodget/store/config/mybatis/store.xml"/>        
+    </mappers>
+</configuration>

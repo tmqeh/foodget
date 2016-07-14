@@ -1,0 +1,261 @@
+.search {
+	color: #333;
+    font-family: -webkit-body;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 15px;
+    border: 0px;
+}
+
+.search-btn {
+	height: 31px;
+    background-color: #ff5252;
+    padding: 3px;
+}
+
+.keyword-rank {
+    height: 31px;
+    background-color: transparent;
+    padding: 2px;
+    border: 2px solid #ffffff;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.joinmodal-input {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #c4c4c4;
+}
+
+.join-dialog{
+	width: 450px;
+    margin-top: 10%;
+}
+
+.join-modal-body {
+	margin:0px;
+}
+
+.join-modal-body h4 {
+	font-size: 16px;
+}
+
+.btn-priamry {
+	background-color: #ff5252;
+    border-radius: 0px;
+    width: 100%;
+    color: white;
+    padding: 15px 0px;
+    font-size: 20px;
+}
+
+.btn-modal-sub {
+	background-color: #ffffff;
+    border-radius: 0px;
+    color: #ff5252;
+    padding: 5px 0px;
+    font-size: 20px;
+    border: 1px solid #ff5252;
+}
+
+.idcheck {
+	display: none;
+    color: #ff5252;
+    margin-top: 10px;
+}
+
+.logincheck {
+	display: none;
+    color: #ffffff;
+    margin-top: 10px;
+    background: #ff5252;
+    padding: 5px;
+}
+
+.joincheck-ok {
+	border: 1px solid #19c265;
+}
+
+.joincheck-fail {
+	border: 1px solid #ff5252;
+}
+
+.map-box {
+    height: 400px;
+    overflow: hidden;
+    width: 100%; height: 150px; padding: 5px;
+border: 1px solid;
+}
+
+.navbar-primary {
+    background-color: rgba(51,51,51,0.9);
+    color: white;
+}
+
+.store-bg-primary {
+    background-color:#f5f5f5;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.storepage {
+    background-color:#f5f5f5;
+    padding:50px 0px;
+}
+
+.storeimg {
+    width:100%;
+}
+
+.storepage_info {
+    padding-right:0px;
+}
+
+.storeimg_box {
+        padding-left:0px;
+    
+}
+
+.storepage_sub {
+    padding: 20px 0px;
+    border-bottom: 1px solid #505050;
+}
+
+.storepage_sub h5 {
+    font-size:15px;
+    color: #333333;
+}
+
+.storepage_sub h2 {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.storepage_sub h4 {
+    font-weight: bold;
+    color: #777777;
+}
+
+.searchbar {
+    padding: 0px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.scrollbtn {
+    text-align: center;
+    width: 100%; 
+    height: 450px; 
+    overflow:hidden;
+    border-bottom: 1px solid white;
+}
+
+.scrollbar {
+    padding: 10px 0px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.storeinfo {
+    padding: 20px;
+    background-color: #ffffff;
+    color: #484848;
+    border-bottom: 1px solid #dce0e0;
+}
+
+.storeinfo .row {
+    border-bottom: 1px solid #dce0e0;
+}
+
+.storetitle {
+    padding: 0px 0px;
+    padding-bottom: 10px;
+    margin: 0px 0px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.storetitle label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #888888;
+    margin-left: 20px;
+}
+
+.storetitle a {
+    font-size: 15px;
+    color: #484848;
+    float: right;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.storescore {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.storescore .col-xs-2 {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: left;
+    padding: 0px;
+    color: #ff5252;
+    font-weight: bold;
+}
+
+.storescore label {
+    font-size: 15px;
+    color: #484848;
+}
+
+.storedetail {
+    padding: 0px;
+}
+
+.storedetail h5{
+    margin: 20px 0px;
+}
+
+.storeimgbox {
+    height: 135px;
+    width: 202px;
+    border: 1px solid #dce0e0;
+    background-color: white;
+    margin: 0px 4px;
+    float: left;
+}
+
+.storeblog h2{
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    font-weight: bold;
+    color: #484848;
+}
+
+.blogbox h4{
+    font-weight: bold;
+    color: #ff5252;
+}
+
+.blogbox h5{
+    font-size: 15px;
+}
+
+.blogbox h6 {
+    font-size: 14px;
+    color: #888888;
+}
+
+.blogimgbox {
+    background-color: white;
+    height: 100px;
+    border: 1px solid #dce0e0;
+}

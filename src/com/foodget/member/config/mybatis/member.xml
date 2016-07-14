@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.foodget.member.model.dao.MemberDaoImpl">
+    
+<!--    <typeAlias alias="mdto" type="com.kitri.member.model.MemberDto"/>-->
+    <!-- 현재 xml에서 사용됨 (지역변수같은 것)-->
+    
+    <insert id="join" parameterType="mdto">
+        insert into member(name, email, password, email_auth)
+        values(#{name}, #{email}, #{password}, 0)
+    </insert>
+    
+    <select id="idCheck" parameterType="String" resultType="int">
+        select count(email)
+        from member
+        where email=#{email}
+    </select>
+    
+    <select id="login" parameterType="Map" resultType="mdto">
+        select email, password, name
+        from member
+        where email = #{email}
+        and password = #{password}
+    </select>
+    
+    <update id="emailauth" parameterType="String">
+        update member
+        set email_auth = 1
+        where email = #{email}
+    </update>
+</mapper>

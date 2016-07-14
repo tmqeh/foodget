@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+    <common>
+        <totalCount>1</totalCount>
+        <currentPage>1</currentPage>
+        <countPerPage>10</countPerPage>
+        <errorCode>0</errorCode>
+        <errorMessage>정상</errorMessage>
+    </common>
+    <juso>
+        서울특별시 구로구 구로동 + 
+        <roadAddr><![CDATA[서울특별시 구로구 도림천로 477 (구로동)]]></roadAddr>
+        <roadAddrPart1><![CDATA[서울특별시 구로구 도림천로 477]]></roadAddrPart1>
+        <roadAddrPart2><![CDATA[ (구로동)]]></roadAddrPart2>
+        <jibunAddr><![CDATA[서울특별시 구로구 구로동  810-3 구로디지털단지역]]></jibunAddr>
+        <engAddr><![CDATA[477, Dorimcheon-ro, Guro-gu, Seoul]]></engAddr>
+        <zipNo><![CDATA[08391]]></zipNo>
+        <admCd><![CDATA[1153010200]]></admCd>
+        <rnMgtSn><![CDATA[115303116011]]></rnMgtSn>
+        <bdMgtSn><![CDATA[1153010200108100003000001]]></bdMgtSn>
+        <detBdNmList><![CDATA[2호선]]></detBdNmList>
+    </juso>
+</results>

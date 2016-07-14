@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<bean id="ds" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/foodget"></property>
+	</bean>
+	
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>
+		<property name="configLocation" value="classpath:com/foodget/config/mybatis/SqlMapConfig.xml"/>
+	</bean>
+	
+	<bean id="sst" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="ssf"/>
+	</bean>
+	
+	<bean id="sdao" class="com.foodget.store.model.dao.StoreDaoImpl"  scope="prototype">
+		<property name="sqlSession" ref="sst"></property>
+	</bean>
+	
+	<bean id="sservice" class="com.foodget.store.service.StoreServiceImpl">
+		<property name="storeDao" ref="sdao"></property>
+	</bean>
+
+</beans>
