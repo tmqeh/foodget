@@ -5,18 +5,18 @@
 <head>
 <%@ include file="/common/common.jsp"%>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <script>
-    var loginFail = "${loginFail}";
-    </script>
-    <script src="${root}/js/member/member.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>푸드득 FoodGet</title>
+<script>
+var loginFail = "${loginFail}";
+</script>
+<script src="${root}/js/member/member.js"></script>
+
+<title>푸드득 FoodGet</title>
 
 </head>
 
@@ -34,7 +34,7 @@
 
             <!-- 비 로그인 -->
             <c:if test="${userInfo == null }">            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse menu" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="page-scroll" href="#about">푸드득 소개</a>
@@ -52,7 +52,7 @@
             
             <!-- 로그인 -->
             <c:if test="${userInfo != null }">            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse menu" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="page-scroll" href="#about">푸드득 소개</a>
@@ -63,26 +63,15 @@
                     <li>
                         <a class="page-scroll" href="#portfolio" data-toggle="modal" data-target="#loginModal">${userInfo.name}</a>
                         <ul>
-							<div class="menu-body">
-								<div class="menu-panel-body-top">
-									<li><a>나의 플래너</a></li>
-								</div>
-							</div>
-							<div class="menu-body">
-								<div class="menu-panel-body">
-									<li><a >위시리스트</a></li>
-								</div>
-							</div>
-							<div class="menu-body">
-								<div class="menu-panel-body">
-									<li><a>프로필 수정</a></li>
-								</div>
-							</div>
-							<div class="menu-body">
-								<div class="menu-panel-body">
-									<li><a>로그아웃</a></li>
-								</div>
-							</div>
+                        	<li class='sub'>
+								<a href='#'>나의 맛집</a>
+							</li>
+							<li class='sub'>
+								<a href='#'>프로필 수정</a>
+							</li>
+							<li class='sub'>
+								<a href='${root }/member/logout.html'>로그아웃</a>
+							</li>
 						</ul>
                     </li>
                 </ul>
