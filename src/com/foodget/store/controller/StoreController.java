@@ -32,6 +32,15 @@ public class StoreController {
 	public void setStoreService(StoreService storeService) {
 		this.storeService = storeService;
 	}
+	@RequestMapping(value="/storeinsert.html", method=RequestMethod.POST)
+	public ModelAndView store(@RequestParam("storeinfo")String storeinfo, @RequestParam("addresskeyword")String keyword) {
+//		System.out.println("storeinfo = " + storeinfo);
+		ModelAndView mav = new ModelAndView();
+		List<StoreDto> slist = storeService.StoreSaveAndLoad(storeinfo);
+		mav.addObject("slist", slist);
+		mav.setViewName("/search");
+		return mav;
+	}
 
 	@RequestMapping(value="/storeInfo.html", method=RequestMethod.POST)
 	public ModelAndView storeInfo(@RequestParam("store_seq")int store_seq) {
