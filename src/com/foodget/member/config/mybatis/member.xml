@@ -23,6 +23,7 @@
         from member
         where email = #{email}
         and password = #{password}
+        and email_auth = 1
     </select>
     
     <update id="emailauth" parameterType="String">

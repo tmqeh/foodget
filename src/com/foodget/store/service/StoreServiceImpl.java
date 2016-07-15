@@ -54,11 +54,15 @@ public class StoreServiceImpl implements StoreService {
 		JSONObject json = new JSONObject();
 		StringTokenizer st = new StringTokenizer(storeinfo, "|");
 		String content;
-		for(int i = 0 ; i < 14 ; i++) {
+		int j = 0;
+		int size = st.countTokens();
+		for(int i = 0 ; i < size ; i++) {
 			storeDto = new StoreDto();
 			content = st.nextToken();
 			json = StringMethod.getStringMethod().stringToJson(content);
 			storeDto.setStore_name(json.get("storeName")+"");
+//			System.out.println(i + " 번째 가게 : " + storeDto.getStore_name());
+//			System.out.println( "-------------------------"+ j++ +"-----------------------");
 			storeDto.setStore_address(json.get("storeAddress")+"");
 			storeDto.setStore_phone(json.get("storePhone")+"");
 			storeDto.setStore_latitude(Double.parseDouble(json.get("storeLatitude")+""));

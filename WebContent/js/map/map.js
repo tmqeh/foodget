@@ -35,7 +35,14 @@ function searchPlaces() {
     }
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-    ps.keywordSearch( keyword, placesSearchCB);
+    for( var i=1;i<4;i++){
+    	var options = {
+    		page : i
+           };
+    	
+       ps.keywordSearch( keyword, placesSearchCB, options);
+       
+       }
 
 }
 
@@ -92,12 +99,8 @@ function displayPlaces(places) {
         var placePosition = new daum.maps.LatLng(places[i].latitude, places[i].longitude);
             //marker = addMarker(placePosition, i), 
            // itemEl = getListItem(i, places[i], marker); // 검색 결과 항목 Element를 생성합니다
-            var flag=false;
-            
-            if(i==places.length-1){
-            	flag=true;
-            }
-            makeStoreJson(places[i], flag);
+
+            makeStoreJson(places[i]);
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
@@ -138,7 +141,7 @@ function displayPlaces(places) {
     //map.setBounds(bounds);
 }
 
-function makeStoreJson(places, flag) {
+function makeStoreJson(places) {
 	var storeName = places.title;
 	var storeAddress = places.address;
 	var storePhone = places.phone;
@@ -146,15 +149,11 @@ function makeStoreJson(places, flag) {
 	var storeLongitude= places.longitude;
 	
 	var storeJsonString = '{"storeName" :"' + storeName + '", "storeAddress" :"' + storeAddress + '", "storePhone" : "' + storePhone + '", "storeLatitude" : "' + storeLatitude + '","storeLongitude" : "' + storeLongitude + '" }';
-	storeJson(storeJsonString, flag);
+	storeJson(storeJsonString);
 }
 
-function storeJson(storeJsonString, flag) {
-	if(flag==true) {
-		totalJson += storeJsonString;
-	} else {
-		totalJson += storeJsonString + "|";
-	}
+function storeJson(storeJsonString) {
+	totalJson += storeJsonString + "|";
 }
 
 

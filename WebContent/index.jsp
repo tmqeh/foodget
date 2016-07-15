@@ -2,86 +2,15 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 <%@ include file="/common/common.jsp"%>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
 
 <script>
 var loginFail = "${loginFail}";
 </script>
 <script src="${root}/js/member/member.js"></script>
 
-<title>푸드득 FoodGet</title>
-
-</head>
-
 <body id="page-top">
-
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top"><img src="${root}/img/title.png" style="height:35px"></a>
-            </div>
-
-            <!-- 비 로그인 -->
-            <c:if test="${userInfo == null }">            
-            <div class="collapse navbar-collapse menu" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">푸드득 소개</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services" data-toggle="modal" data-target="#joinModal">회원가입</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio" data-toggle="modal" data-target="#loginModal">로그인</a>
-                    </li>
-                </ul>
-            </div>            
-            </c:if>
-            <!-- /.비 로그인 -->
-            
-            <!-- 로그인 -->
-            <c:if test="${userInfo != null }">            
-            <div class="collapse navbar-collapse menu" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">푸드득 소개</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services" data-toggle="modal" data-target="#joinModal">맛집 추천</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio" data-toggle="modal" data-target="#loginModal">${userInfo.name}</a>
-                        <ul>
-                        	<li class='sub'>
-								<a href='#'>나의 맛집</a>
-							</li>
-							<li class='sub'>
-								<a href='#'>프로필 수정</a>
-							</li>
-							<li class='sub'>
-								<a href='${root }/member/logout.html'>로그아웃</a>
-							</li>
-						</ul>
-                    </li>
-                </ul>
-            </div>            
-            </c:if>
-            <!-- /.로그인 -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
+<%@ include file="/common/header/header_main.jsp"%>
     <header>
     	<form id="storeinsertform" name ="storeinsertform" method="post" action="">
     		<input type="hidden" id="storeinfo"  name="storeinfo" value="">

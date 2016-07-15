@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +31,7 @@ import com.foodget.member.model.MemberDto;
 import com.foodget.member.service.MemberService;
 
 @Controller
+@SessionAttributes("userInfo")
 @RequestMapping("/member")
 public class MemberController {
 	private MemberService memberService;
@@ -53,8 +55,6 @@ public class MemberController {
 		JSONObject json = new JSONObject();
 		json.put("cnt", cnt);
 		json.get("cnt");
-//		System.out.println("cnt : " +json.get("cnt") );
-//		System.out.println("tostring : " +  json.toJSONString());
 		return json.toJSONString();
 	}
 	
@@ -73,8 +73,7 @@ public class MemberController {
 			model.addAttribute("userInfo", memberDto);
 		} else {
 			mav.addObject("loginFail", "loginFail");
-		}
-		
+		}		
 		mav.setViewName("/index");
 		return mav;
 	}
@@ -82,7 +81,7 @@ public class MemberController {
 	@RequestMapping(value="/logout.html", method=RequestMethod.GET)
 	public String logout(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
-		return "/index";
+		return "redirect:/index.jsp";
 	}
 	
 	public String emailSMTP(String receiver, String name) {
