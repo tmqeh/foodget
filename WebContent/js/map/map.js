@@ -36,17 +36,17 @@ function searchPlaces() {
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     for( var i=1;i<4;i++){
-    	var options = {
-    		page : i
-           };
-    	
-       ps.keywordSearch( keyword, placesSearchCB, options);
-       
-       }
-
+	var options = {
+		page : i
+       };    	
+	ps.keywordSearch( keyword, placesSearchCB, options);       
+	}
+    
+    submitJson();
 }
 
 function submitJson() {
+	alert(totalJson);
 	$("#storeinfo").val(totalJson);
 	$("#addresskeyword").val($("#keyword").val());
     document.storeinsertform.action = root+"/store/storeinsert.html";
@@ -129,10 +129,10 @@ function displayPlaces(places) {
         })(marker, places[i].title);
 
         fragment.appendChild(itemEl);*/
-    }
-    
-    submitJson();
 
+    }
+
+    alert(totalJson);
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
    // listEl.appendChild(fragment);
     //menuEl.scrollTop = 0;

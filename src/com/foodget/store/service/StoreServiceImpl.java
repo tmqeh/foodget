@@ -56,7 +56,9 @@ public class StoreServiceImpl implements StoreService {
 		String content;
 		int j = 0;
 		int size = st.countTokens();
+		System.out.println("size >>>>>>>>>>>> " + size);
 		for(int i = 0 ; i < size ; i++) {
+			System.out.println("i :"+i);
 			storeDto = new StoreDto();
 			content = st.nextToken();
 			json = StringMethod.getStringMethod().stringToJson(content);

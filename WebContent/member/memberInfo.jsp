@@ -6,8 +6,10 @@
 <body style="background-color: #fbfbfb;">
 <%@ include file="/common/header/header_other.jsp"%>
 <div class="infomenu-bar">
-	<div class="col-md-2">나의 맛집</div>
-	<div class="col-md-2">프로필</div>
+	<div class="container">
+	<ul class="col-md-2"><a>나의 맛집</a></ul>
+	<ul class="col-md-2"><a>프로필</a></ul>
+	</div>
 </div>
 </body>
 </html>

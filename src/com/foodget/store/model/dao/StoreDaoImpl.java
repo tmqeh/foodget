@@ -20,6 +20,8 @@ public class StoreDaoImpl implements StoreDao {
 	@Override
 	public void insertStore(StoreDto storeDto) {		
 		int cnt = sqlSession.selectOne("com.foodget.store.model.dao.StoreDaoImpl.storeCheck", storeDto);
+//		System.out.println("cnt 값 : "+cnt);
+//		System.out.println(storeDto.toString());
 		if(cnt == 0) {
 			sqlSession.insert("com.foodget.store.model.dao.StoreDaoImpl.storeInsert", storeDto);			
 		}

@@ -485,3 +485,14 @@ border: 1px solid;
     top: 61px;
     position: absolute;
 }
+
+.infomenu-bar ul {
+    text-align: center;
+    padding-top: 10px;
+    margin: 0px;    
+}
+
+.infomenu-bar ul a {
+        color: #484848;
+    font-weight: bold;
+}

@@ -84,8 +84,8 @@ public class StringMethod {
 		}
 		return json;
 	}
-
 	public static StringMethod getStringMethod() {
+		
 		return stringMethod;
 	}
 
