@@ -66,9 +66,6 @@ $(document).ready(function(){
     minWidth: $(this).width,
     resize:function() {	    	
   		map.relayout(); 
-  		
-  		
-  		
 	    map.setBounds(bounds);
     }
   });

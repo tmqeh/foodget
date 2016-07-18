@@ -1,7 +1,8 @@
 
 var totalJson = "";
-
+var cnt = 0;
 var markers = [];
+var listEl;
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -33,20 +34,24 @@ function searchPlaces() {
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
         return false;
     }
+    
+    if(listEl){
+      	 removeAllChildNods(listEl);
+      	 removeMarker();
+      }
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     for( var i=1;i<4;i++){
-	var options = {
-		page : i
-       };    	
-	ps.keywordSearch( keyword, placesSearchCB, options);       
+		var options = {
+			page : i
+	       };
+		ps.keywordSearch( keyword, placesSearchCB, options);       
 	}
-    
-    submitJson();
+
 }
 
 function submitJson() {
-	alert(totalJson);
+	alert(cnt+"번째 submitJson" );
 	$("#storeinfo").val(totalJson);
 	$("#addresskeyword").val($("#keyword").val());
     document.storeinsertform.action = root+"/store/storeinsert.html";
@@ -56,15 +61,19 @@ function submitJson() {
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(status, data, pagination) {
     if (status === daum.maps.services.Status.OK) {
-
+    	alert(" placesSearchCB" );
         // 정상적으로 검색이 완료됐으면
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data.places);
-
+        //submitJson();
         // 페이지 번호를 표출합니다
         //displayPagination(pagination);
+        cnt++;
+                
+        if(cnt==3){
+        	submitJson();    	
+        }
         
-
     } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 
         alert('검색 결과가 존재하지 않습니다.');
@@ -81,7 +90,7 @@ function placesSearchCB(status, data, pagination) {
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
 
-    var listEl = document.getElementById('placesList'), 
+    listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
     fragment = document.createDocumentFragment(), 
     bounds = new daum.maps.LatLngBounds(), 
