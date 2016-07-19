@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.foodget.member.model.MemberDto;
 import com.foodget.store.api.JosuChangeApi;
 import com.foodget.store.api.NaverApi;
+import com.foodget.store.api.TmapApi;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
@@ -77,6 +78,15 @@ public class StoreController {
 		List<String> list = MapParsing.getMapParsing().getBlogDto().getBlogRankInfoDto().getBlogImgInfoDto().getImgSrcList();
 		System.out.println("블로그 사진 갯수 :"+list.size());
 		mav.addObject("list", list);
+		mav.setViewName("/hojin_Test/viewImg");
+		return mav;
+	}
+	@RequestMapping(value="tmapdistance.html")
+	public ModelAndView tmapdistance(@RequestParam("endX") String endX,@RequestParam("endY") String endY,@RequestParam("startX") String startX,@RequestParam("startY") String startY )
+	{
+		ModelAndView mav = new ModelAndView();
+		String distance = TmapApi.getTmapApi().getDistance(endX, endY, startX, startY);
+		mav.addObject("distance", distance);
 		mav.setViewName("/hojin_Test/viewImg");
 		return mav;
 	}

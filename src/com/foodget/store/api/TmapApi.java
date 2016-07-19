@@ -21,6 +21,13 @@ import com.foodget.utill.Encoder;
 import com.foodget.utill.StringMethod;
 
 public class TmapApi {
+	private static TmapApi tmapApi;
+	static {
+		tmapApi = new TmapApi();
+	}
+	public static TmapApi getTmapApi() {
+		return tmapApi;
+	}
 	public static void main(String[] args) {
 //		System.out.println(StringMethod.getStringMethod().StringToKm(new TmapApi().getDistance("","","","")));
 		System.out.println(StringMethod.getStringMethod().StringToKm("1111"));
