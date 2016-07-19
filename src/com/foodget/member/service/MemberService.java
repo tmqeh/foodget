@@ -9,4 +9,5 @@ public interface MemberService {
 	public MemberDto login(String email, String password);
 	public int idCheck(String email);
 	public void emailauth(String email);
+	public void modify(MemberDto memberDto);
 }
