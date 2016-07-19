@@ -11,6 +11,15 @@ public class StoreDto {
 	private int clean_taste;
 	private int sweet_taste;
 	private int fresh_taste;
+	@Override
+	public String toString() {
+		return "StoreDto [store_seq=" + store_seq + ", store_name=" + store_name + ", store_address=" + store_address
+				+ ", store_phone=" + store_phone + ", store_food=" + store_food + ", hot_taste=" + hot_taste
+				+ ", sour_taste=" + sour_taste + ", clean_taste=" + clean_taste + ", sweet_taste=" + sweet_taste
+				+ ", fresh_taste=" + fresh_taste + ", k_hot_taste=" + k_hot_taste + ", store_longitude="
+				+ store_longitude + ", store_latitude=" + store_latitude + "]";
+	}
+
 	private int k_hot_taste;
 	private double store_longitude;
 	private double store_latitude;

@@ -10,6 +10,9 @@
   margin: 0;
   line-height: 1;
 }
+
+
+
 .menu > ul {
   position: relative;
   display: block;
@@ -209,7 +212,7 @@
 
 .search-btn {
 	height: 31px;
-    background-color: #ff5252;
+    background-color: #03a9f4;
     padding: 3px;
 }
 
@@ -245,7 +248,7 @@
 }
 
 .btn-priamry {
-	background-color: #ff5252;
+	background-color: #03a9f4;
     border-radius: 0px;
     width: 100%;
     color: white;
@@ -256,15 +259,15 @@
 .btn-modal-sub {
 	background-color: #ffffff;
     border-radius: 0px;
-    color: #ff5252;
+    color: #03a9f4;
     padding: 5px 0px;
     font-size: 20px;
-    border: 1px solid #ff5252;
+    border: 1px solid #03a9f4;
 }
 
 .idcheck {
 	display: none;
-    color: #ff5252;
+    color: #03a9f4;
     margin-top: 10px;
 }
 
@@ -272,7 +275,7 @@
 	display: none;
     color: #ffffff;
     margin-top: 10px;
-    background: #ff5252;
+    background: #03a9f4;
     padding: 5px;
 }
 
@@ -281,7 +284,7 @@
 }
 
 .joincheck-fail {
-	border: 1px solid #ff5252;
+	border: 1px solid #03a9f4;
 }
 
 .map-box {
@@ -406,7 +409,7 @@ border: 1px solid;
     margin-top: 20px;
     text-align: left;
     padding: 0px;
-    color: #ff5252;
+    color: #03a9f4;
     font-weight: bold;
 }
 
@@ -442,7 +445,7 @@ border: 1px solid;
 
 .blogbox h4{
     font-weight: bold;
-    color: #ff5252;
+    color: #03a9f4;
 }
 
 .blogbox h5{
@@ -458,4 +461,38 @@ border: 1px solid;
     background-color: white;
     height: 100px;
     border: 1px solid #dce0e0;
+}
+
+.imgbackground {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;
+  background-image: url('../img/background2.jpg');
+  text-align: center;
+  color: white;
+}
+
+.infomenu-bar {
+    height: 40px;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dce0e0;
+    top: 61px;
+    position: absolute;
+}
+
+.infomenu-bar ul {
+    text-align: center;
+    padding-top: 10px;
+    margin: 0px;    
+}
+
+.infomenu-bar ul a {
+        color: #484848;
+    font-weight: bold;
 }
