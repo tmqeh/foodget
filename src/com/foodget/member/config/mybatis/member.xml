@@ -31,4 +31,10 @@
         set email_auth = 1
         where email = #{email}
     </update>
+    
+    <update id="modify" parameterType="mdto">
+        update member
+        set name = #{name}, password = #{password}, member_originimg = #{member_originimg}, member_saveimg = #{member_saveimg}, member_savefolder = #{member_savefolder}
+        where email = #{email}
+    </update>
 </mapper>

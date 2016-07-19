@@ -6,7 +6,7 @@
 	<bean id="mcontrol" class="com.foodget.member.controller.MemberController">
 		<property name="memberService" ref="mservice"/>
 	</bean>
-	
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="suffix" value=".jsp"/>
 	</bean>

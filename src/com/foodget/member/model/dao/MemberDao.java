@@ -9,4 +9,5 @@ public interface MemberDao {
 	public MemberDto login(Map map);
 	public int idCheck(String email);
 	public void emailauth(String email);
+	public void modify(MemberDto memberDto);
 }

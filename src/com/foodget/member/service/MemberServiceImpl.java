@@ -38,6 +38,11 @@ public class MemberServiceImpl implements MemberService {
 	public void emailauth(String email) {
 		memberDao.emailauth(email);		
 	}
+
+	@Override
+	public void modify(MemberDto memberDto) {
+		memberDao.modify(memberDto);
+	}
 	
 	
 }

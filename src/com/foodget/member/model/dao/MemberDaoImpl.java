@@ -36,5 +36,10 @@ public class MemberDaoImpl implements MemberDao {
 		System.out.println("email22222222 : " + email);
 		sqlSession.update("com.foodget.member.model.dao.MemberDaoImpl.emailauth", email);
 	}
+
+	@Override
+	public void modify(MemberDto memberDto) {
+		sqlSession.update("com.foodget.member.model.dao.MemberDaoImpl.modify", memberDto);
+	}
 	
 }
