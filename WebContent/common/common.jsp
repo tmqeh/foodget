@@ -55,4 +55,9 @@
 	
 	<!-- Theme JavaScript -->
 	<script src="${root}/js/creative.js"></script>
+	
+	<!-- Kakao API -->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script src="/resource/Message.js"></script>
+	<script src="/vassets/javascripts/demos_layout.js"></script>
 </head>

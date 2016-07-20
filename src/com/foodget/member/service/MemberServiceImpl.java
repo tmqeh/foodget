@@ -18,15 +18,28 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void join(MemberDto memberDto) {
-		memberDao.join(memberDto);		
+		if(memberDto.getMember_saveimg() != null) {
+			System.out.println("카카오 회원 가입");
+			memberDao.kakaojoin(memberDto);
+		} else {
+			System.out.println("일반 회원 가입");
+			memberDao.join(memberDto);			
+		}
 	}
 
 	@Override
-	public MemberDto login(String email, String password) {
+	public MemberDto login(MemberDto memberDto, String kakaoflag) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("email", email);
-		map.put("password", password);
-		return memberDao.login(map);
+		if(kakaoflag.equals("kakao")) {
+			System.out.println("카카오 로그인");
+			map.put("email", memberDto.getEmail());
+			return memberDao.kakaologin(map);
+		} else {
+			System.out.println("일반 로그인");
+			map.put("email", memberDto.getEmail());
+			map.put("password", memberDto.getPassword());			
+			return memberDao.login(map);
+		}
 	}
 
 	@Override
@@ -37,6 +50,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void emailauth(String email) {
 		memberDao.emailauth(email);		
+	}
+
+	@Override
+	public void modify(MemberDto memberDto) {
+		memberDao.modify(memberDto);
 	}
 	
 	

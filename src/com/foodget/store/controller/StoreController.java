@@ -1,20 +1,14 @@
 package com.foodget.store.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.foodget.member.model.MemberDto;
-import com.foodget.store.api.JosuChangeApi;
 import com.foodget.store.api.NaverApi;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
@@ -80,16 +74,4 @@ public class StoreController {
 		mav.setViewName("/hojin_Test/viewImg");
 		return mav;
 	}
-	
-	public JSONObject stringToJson(String data) {
-	      JSONObject json = new JSONObject();
-	      Object obj = null;
-	      try {
-	         obj = JSONValue.parseWithException(data);
-	         json = (JSONObject) obj;
-	      } catch (ParseException e) {
-	         e.printStackTrace();
-	      }
-	      return json;
-	   }
 }

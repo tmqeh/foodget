@@ -1,9 +1,11 @@
 package com.foodget.member.controller;
 
-import java.io.PrintWriter;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
-import java.util.StringTokenizer;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -13,10 +15,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodget.member.model.MemberDto;
 import com.foodget.member.service.MemberService;
+import com.foodget.utill.StringMethod;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 @SessionAttributes("userInfo")
@@ -41,10 +47,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member.html", method=RequestMethod.POST)
-	public ModelAndView member(MemberDto memberDto) {
+	public ModelAndView member(MemberDto memberDto, @RequestParam String kakaoJson) {
 		ModelAndView mav = new ModelAndView();
+		if(kakaoJson!=null) {
+			memberDto = makeKakaoMemberDto(kakaoJson);
+		}
+		else {
+			emailSMTP(memberDto.getEmail(), memberDto.getName());
+		}
 		memberService.join(memberDto);
-		emailSMTP(memberDto.getEmail(), memberDto.getName());
 		mav.setViewName("redirect:/index.jsp");
 		return mav;
 	}
@@ -65,10 +76,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login.html", method=RequestMethod.POST)
-	public ModelAndView login(@RequestParam("email")String email, @RequestParam("password")String password, Model model) {
+	public ModelAndView login(MemberDto memberDto, Model model, @RequestParam("kakaoJson") String kakaoJson, @RequestParam("kakaoflag") String  kakaoflag ) {
 		ModelAndView mav = new ModelAndView();
-		MemberDto memberDto = memberService.login(email, password);
-		System.out.println(email);
+		System.out.println("제이슨 : " + kakaoJson);
+		if(kakaoflag.equals("kakao")) {
+			memberDto = makeKakaoMemberDto(kakaoJson);
+			int cnt = memberService.idCheck(memberDto.getEmail());
+			if(cnt==0) {
+				memberService.join(memberDto);
+			}
+		} 
+		memberDto = memberService.login(memberDto, kakaoflag);
 		if(memberDto != null) {
 			model.addAttribute("userInfo", memberDto);
 		} else {
@@ -83,6 +101,39 @@ public class MemberController {
 		sessionStatus.setComplete();
 		return "redirect:/index.jsp";
 	}
+	
+	@RequestMapping(value="/modify.html", method=RequestMethod.POST)
+	public String modify(HttpServletRequest request, HttpSession session) throws IOException {
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		
+		String realPath = request.getSession().getServletContext().getRealPath("/picture");
+		int maxSize = 3 * 1024 * 1024;
+		
+		DateFormat df = new SimpleDateFormat("yyyyMMdd");
+		String today = df.format(new Date());
+		String saveDirectory = realPath + File.separator + today;
+		
+		System.out.println(saveDirectory);
+		
+		File file = new File(saveDirectory);
+		if(!file.exists()) {
+			file.mkdirs();
+		} 
+		
+		MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxSize, "UTF-8" ,new DefaultFileRenamePolicy());
+		
+		String member_originimg = multi.getOriginalFileName("picture");
+		String member_saveimg = multi.getFilesystemName("picture");
+		memberDto.setMember_originimg(member_originimg);
+		memberDto.setMember_saveimg(member_saveimg);
+		memberDto.setMember_savefolder(today);
+		
+		memberService.modify(memberDto);
+//		sessionStatus.setComplete();
+//		model.addAttribute("userInfo", memberDto);
+		return "memberInfo";
+	}
+
 	
 	public String emailSMTP(String receiver, String name) {
 		
@@ -157,5 +208,19 @@ public class MemberController {
 			System.out.println("계정 입력");
 	        return new PasswordAuthentication("tmqehh", "wlsdn201");
 		}
+	}
+	
+	//카카오 Json MemberDto 변환
+	public MemberDto makeKakaoMemberDto(String kakaoJson) {
+		MemberDto memberDto = new MemberDto();
+		JSONObject json = new JSONObject();
+		json = StringMethod.getStringMethod().stringToJson(kakaoJson);
+		memberDto.setEmail(json.get("id")+"");
+		json = StringMethod.getStringMethod().stringToJson(json.get("properties")+"");
+		memberDto.setName(json.get("nickname")+"");
+		memberDto.setMember_saveimg(json.get("profile_image")+"");
+		memberDto.setMember_originimg(json.get("profile_image")+"");
+		memberDto.setPassword("1234");
+		return memberDto;
 	}
 }

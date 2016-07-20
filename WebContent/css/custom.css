@@ -247,7 +247,7 @@
 	font-size: 16px;
 }
 
-.btn-priamry {
+.btn-primary {
 	background-color: #03a9f4;
     border-radius: 0px;
     width: 100%;
@@ -482,12 +482,13 @@ border: 1px solid;
     width: 100%;
     background-color: #ffffff;
     border-bottom: 1px solid #dce0e0;
-    top: 61px;
     position: absolute;
+    top: 61px;
+    position: fixed;
+    z-index: 2;
 }
 
 .infomenu-bar ul {
-    text-align: center;
     padding-top: 10px;
     margin: 0px;    
 }
@@ -495,4 +496,99 @@ border: 1px solid;
 .infomenu-bar ul a {
         color: #484848;
     font-weight: bold;
+}
+
+.profilebox {
+    border: 1px solid #dce0e0;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+}
+
+.profilebox label {
+    text-align : right;
+    padding: 8px;
+}
+
+.profilebox input {
+    padding: 8px;
+    border: 1px solid #dce0e0;
+}
+
+.profilebox .row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-profile {
+    margin-top: 10px;
+}
+
+.profileimgbox {
+    height: 150px;
+    width: 150px;
+    margin-bottom: 50px;
+    margin-top: 65px;
+    text-align: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profileimgbox  img{
+    position: absolute;
+    margin: auto;
+    min-height: 100%;
+    max-width: 150px;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+}
+
+.profilebox-header {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    margin: 0px -15px;
+    color: white;
+    padding-left: 20px;
+    background-color: #484848;
+}
+
+.profilebox-header h5{
+    font-size:15px;
+}
+
+.readonly {
+    background-color: rgba(220,224,224,0.3);
+}
+
+.profilebox input[type="file"] {
+    display : none;
+}
+
+.labelicon {
+    background-color: #03a9f4;
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+}
+
+.labelicon .glyphicon {
+    top: 0px;
+}
+
+.profile {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    border: 5px solid #dce0e0;
+    display: inline-block;
 }
