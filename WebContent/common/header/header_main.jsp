@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+
+
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -57,5 +61,8 @@
         </c:if>
         <!-- /.로그인 -->
     </div>
+    
+    
     <!-- /.container-fluid -->
 </nav>
+

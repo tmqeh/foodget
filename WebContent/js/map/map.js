@@ -150,6 +150,14 @@ function displayPlaces(places) {
     //map.setBounds(bounds);
 }
 
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
+
 function makeStoreJson(places) {
 	var storeName = places.title;
 	var storeAddress = places.address;
@@ -168,10 +176,22 @@ function storeJson(storeJsonString) {
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
+	
+	
+	var contact = new Object();
+	contact.title = places.title;
+	contact.phone = places.phone;
+	
+	var jsonText = JSON.stringify(contact);
+	
+	var encodedJsonText = encodeURIComponent(jsonText);
+	
 
 	var el = document.createElement('li'),
-    itemStr = '<div id = "store_name" name="store_name">' + places.title + '</div>';
+	itemStr = '<input type="checkbox" name="box" value=' +encodedJsonText + '>';
+	//places.title
 
+	itemStr += '<div id = "store_name" name="store_name">' + places.title + '</div>';
 
     if (places.newAddress) {
         itemStr += '<div id = "store_address" name="store_address">' + places.newAddress + '</div>';
