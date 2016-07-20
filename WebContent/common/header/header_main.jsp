@@ -102,14 +102,14 @@
 	
 	    <!-- Modal content-->
 	    <form name ="loginform" method="post" action="">
+	    <input type="hidden" name="kakaoJson" id="kakaoJson" value="">
+	    <input type="hidden" name="kakaoflag" id="kakaoflag" value="">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	      	<div id="loginfail" class="logincheck"><span class="glyphicon glyphicon-exclamation-sign"></span> 아이디와 비밀번호를 확인해주세요.</div>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        <div>
-	        <a id="custom-login-btn" href="javascript:loginWithKakao()">
-<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>
-</a>
+<a id="kakao-login-btn"></a>
 	        </div>
 	      </div>
 	      <div class="modal-body row join-modal-body">
@@ -127,19 +127,32 @@
 	
 	  </div>
 	</div>
-	
-	<script type='text/javascript'>
+
+<script type='text/javascript'>
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('e5c985a3818ec24af24b34c20d4aa905');
-    // 카카오 로그인 버튼을 생성합니다.
+ // 카카오 로그인 버튼을 생성합니다.
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
       success: function(authObj) {
-        alert(JSON.stringify(authObj));
+        // 로그인 성공시, API를 호출합니다.
+        Kakao.API.request({
+          url: '/v1/user/me',
+          success: function(res) {
+            $("#kakaoJson").val(JSON.stringify(res));
+        	alert($("#kakaoJson").val());        	
+            $("#kakaoflag").val("kakao");
+            document.loginform.action = root+"/member/login.html";
+    		document.loginform.submit();
+          },
+          fail: function(error) {
+            alert(JSON.stringify(error));
+          }
+        });
       },
       fail: function(err) {
-         alert(JSON.stringify(err));
+        alert(JSON.stringify(err));
       }
     });
   //]]>

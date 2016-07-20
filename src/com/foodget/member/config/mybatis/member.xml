@@ -8,8 +8,13 @@
     <!-- 현재 xml에서 사용됨 (지역변수같은 것)-->
     
     <insert id="join" parameterType="mdto">
-        insert into member(name, email, password, email_auth)
-        values(#{name}, #{email}, #{password}, 0)
+        insert into member(name, email, password, email_auth, kakao_auth)
+        values(#{name}, #{email}, #{password}, 0, 1)
+    </insert>
+    
+    <insert id="kakaojoin" parameterType="mdto">
+        insert into member(name, email, password, email_auth, member_saveimg, kakao_auth)
+        values(#{name}, #{email}, #{password}, 1, #{member_saveimg}, 1)
     </insert>
     
     <select id="idCheck" parameterType="String" resultType="int">
@@ -19,10 +24,17 @@
     </select>
     
     <select id="login" parameterType="Map" resultType="mdto">
-        select email, password, name
+        select email, password, name, member_originimg, member_saveimg, member_savefolder, kakao_auth
         from member
         where email = #{email}
         and password = #{password}
+        and email_auth = 1
+    </select>
+    
+    <select id="kakaologin" parameterType="Map" resultType="mdto">
+        select email, password, name, member_originimg, member_savefolder, member_saveimg, kakao_auth
+        from member
+        where email = #{email}
         and email_auth = 1
     </select>
     

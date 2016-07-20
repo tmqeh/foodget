@@ -51,7 +51,6 @@ function searchPlaces() {
 }
 
 function submitJson() {
-	alert(cnt+"번째 submitJson" );
 	$("#storeinfo").val(totalJson);
 	$("#addresskeyword").val($("#keyword").val());
     document.storeinsertform.action = root+"/store/storeinsert.html";
@@ -61,7 +60,6 @@ function submitJson() {
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(status, data, pagination) {
     if (status === daum.maps.services.Status.OK) {
-    	alert(" placesSearchCB" );
         // 정상적으로 검색이 완료됐으면
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data.places);
@@ -141,7 +139,6 @@ function displayPlaces(places) {
 
     }
 
-    alert(totalJson);
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
    // listEl.appendChild(fragment);
     //menuEl.scrollTop = 0;

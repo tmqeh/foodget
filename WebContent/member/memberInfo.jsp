@@ -19,7 +19,13 @@
 	</div>
 	<div class="profileimgbox">
 		<div class="profile row">
+<c:if test="${userInfo.member_savefolder == null }">
+			<img src="${userInfo.member_saveimg}" id="profileimg">
+</c:if>
+<c:if test="${userInfo.member_savefolder != null }">
 			<img src="${root}/picture/${userInfo.member_savefolder}/${userInfo.member_saveimg}" id="profileimg">
+</c:if>				
+		</div>
 			<div>
 				<label for="picture" class="labelicon"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></label>
 			</div>
@@ -30,10 +36,9 @@
 			    output.src = URL.createObjectURL(event.target.files[0]);
 			  };
 			</script>
-		</div>
 	</div>
 	<div class="row" style="border-top: 1px solid #dce0e0; padding-top: 30px;">
-		<label class="col-sm-3">이메일</label>
+		<label class="col-sm-3">이메일(아이디)</label>
 		<div class="col-sm-9">
 			<input type="text" class="col-md-10 col-md-offset-1 readonly" id="email" name="email" value="${userInfo.email}" readonly>
 		</div>
@@ -44,12 +49,14 @@
 			<input type="text" class="col-md-10 col-md-offset-1" id="name" name="name" value="${userInfo.name}">
 		</div>
 	</div>
+<c:if test="${userInfo.kakao_auth == 0 }">
 	<div class="row">
 		<label class="col-sm-3">비밀번호</label>
 		<div class="col-sm-9">
 			<input type="password" class="col-md-10 col-md-offset-1" id="password" name="password" value="${userInfo.password}">
 		</div>
 	</div>
+</c:if>		
 </div>
 </form>
 <div class="col-md-4 col-md-offset-4">
