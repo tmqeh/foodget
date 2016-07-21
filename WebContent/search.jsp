@@ -151,7 +151,6 @@
 						<h5><span class="glyphicon glyphicon-map-marker"></span>&nbsp; ${slist.store_address }</h5><br>
 						<h5><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; ${slist.store_phone }</h5><br>
 					</div>
-					
 				</div>
 			</c:forEach>	
 		</c:if>
