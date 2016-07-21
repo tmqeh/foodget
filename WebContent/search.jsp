@@ -59,7 +59,7 @@
 
 	      <div class="modal-body">
 		<form role="form">
-				      		<div class="form-group"> 
+				      		<div class="form-group" style="float:left"> 
 
 <input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
 <label for="recipient-name" class="control-label">내 위치 :</label>
@@ -73,6 +73,8 @@
 </div>
 				
 				</div>
+				<div style="float:left;height:40px;border:10px solid">지도</div>
+				<div style="clear:both;"></div>
 		  <div class="form-group">
 		    <label for="recipient-name" class="control-label">가게이름 :</label>
 		    <input type="text" class="modal-name" size="40" id="name">
@@ -85,6 +87,7 @@
 		    <label for="recipient-name" class="control-label">가게연락처 :</label>
 		    <input type="text" class="modal-phone" size="40" id="phone">
 		  </div>
+
 		</form>
 	      </div>
 	      <div class="modal-footer">
