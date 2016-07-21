@@ -52,7 +52,6 @@ public class StoreServiceImpl implements StoreService {
 	public List<StoreDto> StoreSaveAndLoad(String storeinfo) {
 		List<StoreDto> slist = new ArrayList<StoreDto>();
 		StoreDto storeDto = null;
-		
 		JSONObject json = new JSONObject();
 		StringTokenizer st = new StringTokenizer(storeinfo, "|");
 		String content;
@@ -71,7 +70,6 @@ public class StoreServiceImpl implements StoreService {
 			storeDto.setStore_phone(json.get("storePhone")+"");
 			storeDto.setStore_latitude(Double.parseDouble(json.get("storeLatitude")+""));
 			storeDto.setStore_longitude(Double.parseDouble(json.get("storeLongitude")+""));
-			
 			storeDao.insertStore(storeDto);				
 			storeDto = storeDao.selectStore(storeDto);
 			slist.add(storeDto);
