@@ -51,7 +51,6 @@ function searchPlaces() {
 }
 
 function submitJson() {
-	alert(cnt+"번째 submitJson" );
 	$("#storeinfo").val(totalJson);
 	$("#addresskeyword").val($("#keyword").val());
     document.storeinsertform.action = root+"/store/storeinsert.html";
@@ -61,7 +60,6 @@ function submitJson() {
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(status, data, pagination) {
     if (status === daum.maps.services.Status.OK) {
-    	alert(" placesSearchCB" );
         // 정상적으로 검색이 완료됐으면
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data.places);
@@ -141,7 +139,6 @@ function displayPlaces(places) {
 
     }
 
-    alert(totalJson);
     // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
    // listEl.appendChild(fragment);
     //menuEl.scrollTop = 0;
@@ -149,6 +146,14 @@ function displayPlaces(places) {
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
     //map.setBounds(bounds);
 }
+
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
 
 function makeStoreJson(places) {
 	var storeName = places.title;
@@ -168,10 +173,22 @@ function storeJson(storeJsonString) {
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
+	
+	
+	var contact = new Object();
+	contact.title = places.title;
+	contact.phone = places.phone;
+	
+	var jsonText = JSON.stringify(contact);
+	
+	var encodedJsonText = encodeURIComponent(jsonText);
+	
 
 	var el = document.createElement('li'),
-    itemStr = '<div id = "store_name" name="store_name">' + places.title + '</div>';
+	itemStr = '<input type="checkbox" name="box" value=' +encodedJsonText + '>';
+	//places.title
 
+	itemStr += '<div id = "store_name" name="store_name">' + places.title + '</div>';
 
     if (places.newAddress) {
         itemStr += '<div id = "store_address" name="store_address">' + places.newAddress + '</div>';

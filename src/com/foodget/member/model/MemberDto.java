@@ -9,8 +9,15 @@ public class MemberDto {
 	private int email_auth;
 	private String member_originimg; 
 	private String member_saveimg; 
-	private String member_savefolder; 
+	private String member_savefolder;
+	private int kakao_auth;
 	
+	public int getKakao_auth() {
+		return kakao_auth;
+	}
+	public void setKakao_auth(int kakao_auth) {
+		this.kakao_auth = kakao_auth;
+	}
 	public int getEmail_auth() {
 		return email_auth;
 	}

@@ -527,18 +527,24 @@ border: 1px solid;
 
 .profileimgbox {
     height: 150px;
+    width: 150px;
     margin-bottom: 50px;
     margin-top: 65px;
     text-align: center;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profileimgbox  img{
-    vertical-align: middle;
-    position: relative;
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    border: 5px solid #dce0e0;
+    position: absolute;
+    margin: auto;
+    min-height: 100%;
+    max-width: 150px;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
 }
 
 .profilebox-header {
@@ -568,4 +574,21 @@ border: 1px solid;
     color: white;
     border-radius: 50%;
     font-size: 20px;
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+}
+
+.labelicon .glyphicon {
+    top: 0px;
+}
+
+.profile {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    border: 5px solid #dce0e0;
+    display: inline-block;
 }

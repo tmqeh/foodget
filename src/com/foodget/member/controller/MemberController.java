@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.foodget.member.model.MemberDto;
 import com.foodget.member.service.MemberService;
+import com.foodget.utill.StringMethod;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -46,10 +47,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member.html", method=RequestMethod.POST)
-	public ModelAndView member(MemberDto memberDto) {
+	public ModelAndView member(MemberDto memberDto, @RequestParam String kakaoJson) {
 		ModelAndView mav = new ModelAndView();
+		if(kakaoJson!=null) {
+			memberDto = makeKakaoMemberDto(kakaoJson);
+		}
+		else {
+			emailSMTP(memberDto.getEmail(), memberDto.getName());
+		}
 		memberService.join(memberDto);
-		emailSMTP(memberDto.getEmail(), memberDto.getName());
 		mav.setViewName("redirect:/index.jsp");
 		return mav;
 	}
@@ -70,9 +76,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/login.html", method=RequestMethod.POST)
-	public ModelAndView login(@RequestParam("email")String email, @RequestParam("password")String password, Model model) {
+	public ModelAndView login(MemberDto memberDto, Model model, @RequestParam("kakaoJson") String kakaoJson, @RequestParam("kakaoflag") String  kakaoflag ) {
 		ModelAndView mav = new ModelAndView();
-		MemberDto memberDto = memberService.login(email, password);		
+		System.out.println("제이슨 : " + kakaoJson);
+		if(kakaoflag.equals("kakao")) {
+			memberDto = makeKakaoMemberDto(kakaoJson);
+			int cnt = memberService.idCheck(memberDto.getEmail());
+			if(cnt==0) {
+				memberService.join(memberDto);
+			}
+		} 
+		memberDto = memberService.login(memberDto, kakaoflag);
 		if(memberDto != null) {
 			model.addAttribute("userInfo", memberDto);
 		} else {
@@ -91,7 +105,6 @@ public class MemberController {
 	@RequestMapping(value="/modify.html", method=RequestMethod.POST)
 	public String modify(HttpServletRequest request, HttpSession session) throws IOException {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
-		System.out.println("이메일 : " + memberDto.getEmail());
 		
 		String realPath = request.getSession().getServletContext().getRealPath("/picture");
 		int maxSize = 3 * 1024 * 1024;
@@ -195,5 +208,19 @@ public class MemberController {
 			System.out.println("계정 입력");
 	        return new PasswordAuthentication("tmqehh", "wlsdn201");
 		}
+	}
+	
+	//카카오 Json MemberDto 변환
+	public MemberDto makeKakaoMemberDto(String kakaoJson) {
+		MemberDto memberDto = new MemberDto();
+		JSONObject json = new JSONObject();
+		json = StringMethod.getStringMethod().stringToJson(kakaoJson);
+		memberDto.setEmail(json.get("id")+"");
+		json = StringMethod.getStringMethod().stringToJson(json.get("properties")+"");
+		memberDto.setName(json.get("nickname")+"");
+		memberDto.setMember_saveimg(json.get("profile_image")+"");
+		memberDto.setMember_originimg(json.get("profile_image")+"");
+		memberDto.setPassword("1234");
+		return memberDto;
 	}
 }
