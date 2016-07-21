@@ -59,17 +59,21 @@ public class StoreServiceImpl implements StoreService {
 		int size = st.countTokens();
 		System.out.println("size >>>>>>>>>>>> " + size);
 		for(int i = 0 ; i < size ; i++) {
-			System.out.println("i :"+i);
-			storeDto = new StoreDto();
 			content = st.nextToken();
 			json = StringMethod.getStringMethod().stringToJson(content);
-			storeDto.setStore_name(json.get("storeName")+"");
+			String storeAddress=json.get("storeAddress")+"";
+			String storeName = json.get("storeName")+"";
+			storeDto = new StoreDto();
+			
+			storeDto.setStore_name(storeName);
 //			System.out.println(i + " 번째 가게 : " + storeDto.getStore_name());
 //			System.out.println( "-------------------------"+ j++ +"-----------------------");
-			storeDto.setStore_address(json.get("storeAddress")+"");
+			String store_category = NaverApi.naverOpenApiSearchArea(StringMethod.getStringMethod().cutThatDong(storeAddress)+" "+storeName);
+			storeDto.setStore_address(storeAddress);
 			storeDto.setStore_phone(json.get("storePhone")+"");
 			storeDto.setStore_latitude(Double.parseDouble(json.get("storeLatitude")+""));
 			storeDto.setStore_longitude(Double.parseDouble(json.get("storeLongitude")+""));
+			storeDto.setStore_category(store_category);
 			storeDao.insertStore(storeDto);				
 			storeDto = storeDao.selectStore(storeDto);
 			slist.add(storeDto);
@@ -105,12 +109,12 @@ public class StoreServiceImpl implements StoreService {
 		System.out.println("seq  :"+storeSeq);
 		List<BlogDto> blogList=null;
 		if(selectStoreSeq==0){
-			String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(storeDto.getStore_address()));
+			String newAddress= JosuChangeApi.getNewAddres(StringMethod.getStringMethod().cutThatDong(storeDto.getStore_address()));
 			String storeTitle = storeDto.getStore_name();
-			String searchKeyword = newAddress+" "+storeTitle;
+			String searchKeyword = StringMethod.getStringMethod().cutThatDong(JosuChangeApi.getNewAddres(storeDto.getStore_address()))+" "+storeTitle;
 			System.out.println("블로그 검색 키워드 :"+searchKeyword);
 			System.out.println(">>>>블로그 파싱 시작");
-			blogList = NaverApi.getNaverApi().blogInfo(searchKeyword,storeDto.getStore_phone(),storeSeq);
+			blogList = NaverApi.getNaverApi().blogInfo(searchKeyword,storeDto.getStore_phone(),storeSeq,newAddress);
 			for(int i=0;i<blogList.size();i++){
 				BlogDto blogDto = new BlogDto();
 				blogDto = blogList.get(i);

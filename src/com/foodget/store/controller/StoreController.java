@@ -56,7 +56,6 @@ public class StoreController {
 		ModelAndView mav = new ModelAndView();
 		MapParsing.getMapParsing().startParsing(blogSrc);
 		List<String> list = MapParsing.getMapParsing().getBlogDto().getBlogRankInfoDto().getBlogImgInfoDto().getImgSrcList();
-		System.out.println("블로그 사진 갯수 :"+list.size());
 		mav.addObject("list", list);
 		mav.setViewName("/hojin_Test/viewImg");
 		return mav;

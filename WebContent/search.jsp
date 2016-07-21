@@ -92,7 +92,7 @@
 	      </div>
 	      <div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-		<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="javascript:gocart();">장바구니에 담기</button>
+		<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:gocart();">장바구니에 담기</button>
 	      </div>
 	    </div>
 	  </div>
@@ -140,24 +140,20 @@
 				<div class="row storepage_sub">
 					<div class="col-sm-4 storeimg_box">
 					
-	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}">장바구니</button>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}">장바구니</button>
 		
 					
 						<img src="${root}/img/food1.JPG" class="storeimg">
 					</div>
 					<div class="col-sm-4">
 						<a href="javascript:viewStore('${slist.store_seq }');"><h2>${slist.store_name }</h2></a>
-						<h4>메뉴이름</h4><br>
+						<h4>${slist.store_category}</h4><br>
 						<h5>점수 | 좋아요 | 평가 | 블로그</h5>
 					</div>
 					<div class="col-sm-4 storepage_info">
 						<h5><span class="glyphicon glyphicon-map-marker"></span>&nbsp; ${slist.store_address }</h5><br>
 						<h5><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; ${slist.store_phone }</h5><br>
 					</div>
-					
-
-										
-					
 				</div>
 			</c:forEach>	
 		</c:if>

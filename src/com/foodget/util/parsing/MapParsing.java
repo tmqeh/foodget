@@ -105,11 +105,10 @@ public class MapParsing {
 		
 		blogDto.setBlog_number(blogNumber);
 		blogDto.setRank_score(score);
-		
 		blogDto.setBlogRankInfoDto(blogRankInfoDto);
 		blogDto.setStore_name(mapParsing.getTitle());
 		blogDto.setOld_address(mapParsing.getAddress());
-		String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(mapParsing.getAddress()));
+		String newAddress= JosuChangeApi.getNewAddres(StringMethod.getStringMethod().cutThatDong(mapParsing.getAddress()));
 		blogDto.setNew_address(newAddress);
 		blogDto.setSearchWord(newAddress+" "+mapParsing.getTitle());
 		blogDto.setLog_time(mapParsing.getLogDate().trim());
