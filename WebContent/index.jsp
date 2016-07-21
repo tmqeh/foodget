@@ -64,7 +64,5 @@ var loginFail = "${loginFail}";
         </div>
     </section>
 <script src="${root}/js/map/map.js"></script>	
-
 </body>
-
 </html>

@@ -18,7 +18,7 @@ function initialize(myX,myY){
 	userX=myX;
 	userY=myY
 	console.log(myX);
-	map = new Tmap.Map({div:'map_div', width:'100%',height:document.documentElement.clientHeight-30+"px"});
+	map = new Tmap.Map({div:'map_div',width:'100%', height:'100%'});
 	map.setCenter(new Tmap.LonLat(myX, myY),15);
 	markerLayer = new Tmap.Layer.Markers();
 	map.addLayer(markerLayer);

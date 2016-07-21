@@ -23,11 +23,75 @@
         position: fixed;
         top: 0px;
       }
+    .modal-dialog.modal-fullsize {
+  width: 80%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.modal-content.modal-fullsize {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
+}
     </style>
 
 
 <html>
 <head>
+<script src="${root}/js/api/Tmap.js"></script>
+<script language="javascript" src="https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=5064adfe-57cd-35d4-b5dd-3d46c557ad0e"></script>
+<script>
+var markers;
+var map;
+var kmlLayer;
+var kmlForm;
+var marker;
+var size;
+var offset;
+var icon;
+//pr_3857 인스탄스 생성.
+var pr_3857 = new Tmap.Projection("EPSG:3857");
+//pr_4326 인스탄스 생성.
+var pr_4326 = new Tmap.Projection("EPSG:4326");
+
+function get3857LonLat(coordX, coordY){
+    return new Tmap.LonLat(coordX, coordY).transform(pr_4326, pr_3857);
+}
+function initialize(){
+	myX='14363856.085492350';
+	myY='4178405.946508492';
+	map = new Tmap.Map({div:'map_div', width:'100%',height:document.documentElement.clientHeight-30+"px"});
+	map.setCenter(new Tmap.LonLat(myX, myY),15);
+
+	var lonlat = new Tmap.LonLat(myX, myY);
+    markers = new Tmap.Layer.Markers( "MarkerLayer" );
+    map.addLayer(markers);
+    size = new Tmap.Size(24,38);
+    offset = new Tmap.Pixel(-(size.w/2), -size.h);
+    icon = new Tmap.Icon('https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png', size, offset);  
+	marker = new Tmap.Marker(lonlat, icon);
+	markers.addMarker(marker);
+	map.events.register("click", map, onClickMap); 
+	
+}
+window.onload = function() {
+    initialize();
+}
+function onClickMap(e){ 
+	if(markers !=null){
+		markers.destroy();
+	}
+    var lonlat = map.getLonLatFromViewPortPx(e.xy); 
+    markers = new Tmap.Layer.Markers( "MarkerLayer" );
+    map.addLayer(markers);
+     
+    var marker = new Tmap.Marker(new Tmap.LonLat(lonlat.lon, lonlat.lat), icon);
+    markers.addMarker(marker);
+    
+    alert(lonlat); 
+} 
+</script>
 <%@ include file="/common/common.jsp"%>
 
     <meta charset="utf-8">
@@ -38,43 +102,50 @@
 
     <title>푸드득 FoodGet</title>
 
-</head>
+</head>	
 
 <body id="page-top">
 
-
-
-
+<form id="getrootform" name="getrootform">
+<input type="hidden" id="apikey" name="apikey">
+<input type="hidden" id="q" name="q">
+<input type="hidden" id="output" name="output">
+</form>
 
 <!--  여기는 장바구니 넣기전에 지도나오는부분 시작 -->
 
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
+	  <div class="modal-dialog modal-fullsize">
+	    <div class="modal-content modal-fullsize">
 	      <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 		<h4 class="modal-title" id="exampleModalLabel">New message</h4>
 	      </div>
 
-	      <div class="modal-body">
+	      <div class="modal-body">	      
 		<form role="form">
-				      		<div class="form-group" style="float:left"> 
+		
+		<div class="modal-body" style="border:1px solid;" id="map_div">
+		
+		</div>
+		
+		
+				     	<div class="form-group"> 
 
-<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-<label for="recipient-name" class="control-label">내 위치 :</label>
-<input type="text" id="sample2_address" size="40px" placeholder="한글주소">
-<input type="hidden" id="sample2_addressEnglish" placeholder="영문주소">
-<input type="hidden" id="sample2_postcode" placeholder="우편번호">
+							<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+							<label for="recipient-name" class="control-label">내 위치 :</label>
+							<input type="text" id="sample2_address" size="40px" placeholder="한글주소">
+							<input type="hidden" id="sample2_addressEnglish" placeholder="영문주소">
+							<input type="hidden" id="sample2_postcode" placeholder="우편번호">
 
-<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-<img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-</div>
-				
+								<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+								<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+								<img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+								</div>
+												
 				</div>
-				<div style="float:left;height:40px;border:10px solid">지도</div>
-				<div style="clear:both;"></div>
+
 		  <div class="form-group">
 		    <label for="recipient-name" class="control-label">가게이름 :</label>
 		    <input type="text" class="modal-name" size="40" id="name">
@@ -87,7 +158,10 @@
 		    <label for="recipient-name" class="control-label">가게연락처 :</label>
 		    <input type="text" class="modal-phone" size="40" id="phone">
 		  </div>
-
+		   <div class="form-group">
+		    <label for="recipient-name" class="control-label">거리 :</label>
+		    <input type="text" class="modal-distance" size="40" id="distance">
+		  </div>
 		</form>
 	      </div>
 	      <div class="modal-footer">
@@ -173,6 +247,23 @@
 <script src="${root}/js/jquery.cookie.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+//hojin
+function getRoot(myLocation){
+    $.ajax({
+    	type : "post",
+        url:root+'/store/getroot.html?apikey=57a86a7ab2ca08b43de7cb6d40fdd2ca&q='+myLocation+'&output=json',
+        success:function(data){
+        	alert("성공");
+        	var json = JSON.parse(data);
+        	var starXY  = get3857LonLat(json.point_x,json.point_y);
+        	alert(starXY.lon);
+        	alert(starXY.lat);
+        }
+    })
+//	alert(myLocation);
+}
+
+
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
 
@@ -208,8 +299,9 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample2_postcode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('sample2_address').value = fullAddr;
+            	//이호진 작업 시작
+            	getRoot(fullAddr);
                 document.getElementById('sample2_addressEnglish').value = data.addressEnglish;
-
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
                 element_layer.style.display = 'none';
@@ -286,10 +378,13 @@ var bounds = new daum.maps.LatLngBounds();
 
 <c:forEach var="slist" items="${slist }">
 <script>
-    // 마커를 생성하고 지도에 표시합니다
+function hojin(){
+	  // 마커를 생성하고 지도에 표시합니다
     placePosition = new daum.maps.LatLng("${slist.store_latitude}", "${slist.store_longitude}");
     marker = addMarker(placePosition, "${slist.store_name}"); 
     bounds.extend(placePosition);
+}
+  
 </script>
 </c:forEach>
 
@@ -317,9 +412,6 @@ $(document).ready(function() {
 		  modal.find('.modal-name').val(name);
 		  modal.find('.modal-address').val(address);
 		  modal.find('.modal-phone').val(phone);
-		  
-		  
-		  
 		  
 	});
 });
@@ -425,8 +517,6 @@ function gocart(){
 		contact.phone = phone;
 		
 		var jsonText = JSON.stringify(contact);
-	 
-		
 		
 		var cntstr="\'"+cookiecnt+"\'";
 		$.cookie(cntstr, jsonText, {expires:1, path:'/'});

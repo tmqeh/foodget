@@ -30,7 +30,8 @@ public class TmapApi {
 	}
 	public static void main(String[] args) {
 //		System.out.println(StringMethod.getStringMethod().StringToKm(new TmapApi().getDistance("","","","")));
-		System.out.println(StringMethod.getStringMethod().StringToKm("1111"));
+//		System.out.println(StringMethod.getStringMethod().StringToKm("1111"));
+		tmapApi.locationChange("","");
 	}
 	public String getDistance(String endX, String endY, String startX, String startY){
 		System.setProperty("jsse.enableSNIExtension", "false") ; 
@@ -85,5 +86,50 @@ public class TmapApi {
 		json = (JSONObject)json.get("properties");
 		
 		return json.get("totalDistance").toString();
+	}
+	public String locationChange(String lat, String lon){
+		
+		String jsonStr="";
+		HttpResponse res = null;
+		lat = "127.01441447718481";
+		lon = "37.58267014530073";
+//		String endX="35.3447730";
+//		String endY="129.0199550";
+//		String startX="37.376385";
+//		String startY="126.635564";
+		String url = "https://apis.skplanetx.com/tmap/geo/coordconvert?version=1&lat="+lat+"&lon="+lon;
+		HttpClient client = HttpClientBuilder.create().build();
+		HttpGet req = new HttpGet(url);// reqest 占쏙옙체
+		try {
+			res = client.execute(req);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		BufferedReader reader=null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(res.getEntity().getContent(), "UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} catch (IllegalStateException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		try {
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (Exception e) {
+			sb = new StringBuilder();
+			sb.append("<item><message>에러</message></item>");
+		}
+		jsonStr = sb.toString();
+		System.out.println(jsonStr);
+		
+		return null;
 	}
 }

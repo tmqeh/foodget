@@ -13,14 +13,6 @@
 <script language="javascript" src="https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=5064adfe-57cd-35d4-b5dd-3d46c557ad0e"></script>
 <script>
 var chXY;
-//pr_3857 인스탄스 생성.
-var pr_3857 = new Tmap.Projection("EPSG:3857");
-//pr_4326 인스탄스 생성.
-var pr_4326 = new Tmap.Projection("EPSG:4326");
-
-function get3857LonLat(coordX, coordY){
-    return new Tmap.LonLat(coordX, coordY).transform(pr_4326, pr_3857);
-}
 var myX;
 var myY;
 var options = 
