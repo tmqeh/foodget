@@ -40,7 +40,6 @@ public class StoreDaoImpl implements StoreDao {
 
 	@Override
 	public List<StoreDto> selectStoreList(String keyword) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -69,5 +68,18 @@ public class StoreDaoImpl implements StoreDao {
 		return sqlSession.selectList("com.foodget.store.model.dao.StoreDaoImpl.search", keyword);
 	}
 
+	public int selectStoreSeq(int storeSeq) {
+		return sqlSession.selectOne("com.foodget.store.model.dao.StoreDaoImpl.selectStoreSeq", storeSeq);	
+	}
+
+	@Override
+	public List<BlogRankInfoDto> selectBlog(int storeSeq) {
+		return sqlSession.selectList("com.foodget.store.model.dao.StoreDaoImpl.selectBlog", storeSeq);
+	}
+
+	@Override
+	public List<String> selectBlogImg(String blogUrl) {
+		return sqlSession.selectList("com.foodget.store.model.dao.StoreDaoImpl.selectBlogImg", blogUrl);
+	}
 
 }

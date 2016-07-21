@@ -5,32 +5,43 @@ package com.foodget.store.blog.model;
 public class BlogDto {
 	@Override
 	public String toString() {
-		return "BlogDto [url=" + url + ", store_addres=" + store_addres + ", blog_number=" + blog_number
-				+ ", store_name=" + store_name + ", store_seq=" + store_seq + ", store_phone=" + store_phone
-				+ ", old_address=" + old_address + ", new_address=" + new_address + ", searchWord=" + searchWord
-				+ ", blogRankInfoDto=" + blogRankInfoDto.toString() + ", rank_score=" + rank_score + "]";
+		return "BlogDto [url=" + url + ", blog_number=" + blog_number + ", store_name=" + store_name + ", store_seq="
+				+ store_seq + ", store_phone=" + store_phone + ", description=" + description + ", old_address="
+				+ old_address + ", new_address=" + new_address + ", searchWord=" + searchWord + ", blogRankInfoDto="
+				+ blogRankInfoDto + ", rank_score=" + rank_score + "]";
 	}
 	private String url;
-	private String store_addres;
 	private String blog_number;
 	private String store_name;
 	private int store_seq;
 	private String store_phone;
 	private String description;
+	private String old_address;
+	private String new_address;
+	private String searchWord;
+	private String log_time;
+	private String title;
+	private int rank_score;
+	private BlogRankInfoDto blogRankInfoDto;
 	
+	public String getLog_time() {
+		return log_time;
+	}
+	public void setLog_time(String log_time) {
+		this.log_time = log_time;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	private String old_address;
-	private String new_address;
-	
-	private String searchWord;
-	private BlogRankInfoDto blogRankInfoDto;
-	private int rank_score;
-	
 	public String getStore_phone() {
 		return store_phone;
 	}
@@ -48,12 +59,6 @@ public class BlogDto {
 	}
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	public String getStore_addres() {
-		return store_addres;
-	}
-	public void setStore_addres(String store_addres) {
-		this.store_addres = store_addres;
 	}
 	public String getBlog_number() {
 		return blog_number;

@@ -14,8 +14,8 @@
     </select>
     
     <insert id="storeInsert" parameterType="sdto">
-        insert into store (store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude)
-        values(store_seq.nextval, #{store_name}, #{store_address}, #{store_phone}, 0, 0, 0, 0, 0, 0, #{store_latitude}, #{store_longitude})
+        insert into store (store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude, store_category)
+        values(store_seq.nextval, #{store_name}, #{store_address}, #{store_phone}, 0, 0, 0, 0, 0, 0, #{store_latitude}, #{store_longitude},#{store_category})
     </insert>
     
     <select id="storeInfo" parameterType="sdto" resultType="sdto">
@@ -25,7 +25,7 @@
     </select>
     
     <select id="storeSearch" parameterType="String" resultType="sdto">
-        select store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude
+        select store_seq, store_name, store_address, store_phone, hot_taste, sour_taste, clean_taste, sweet_taste, fresh_taste, k_hot_taste, store_latitude, store_longitude,store_category
         from store
         where store_name = #{store_name}
         and store_address = #{store_address}
@@ -39,10 +39,16 @@
         UPDATE SET
         b.STORE_PHONE = #{store_phone}
         WHEN NOT MATCHED THEN
-        INSERT (b.URL,b.BLOG_NUMBER,b.OLD_ADDRESS,b.NEW_ADDRESS,b.RANK_SCORE,b.STORE_SEQ,b.description)
-        values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, 316,#{description})
+        INSERT (b.URL,b.BLOG_NUMBER,b.OLD_ADDRESS,b.NEW_ADDRESS,b.RANK_SCORE,b.STORE_SEQ,b.description,b.store_phone,b.title,b.log_time)
+        values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, #{store_seq},#{description},#{store_phone},#{title},#{log_time})
     </update>
     
+    <select id="selectStoreSeq" parameterType="int" resultType="int">
+        select count(store_seq)
+        from blog
+        where store_seq = #{storeSeq}
+    </select>
+
     <insert id="insertBlogRank" parameterType="blogrankdto">
         MERGE INTO BLOG_RANK br
         USING dual
@@ -57,7 +63,7 @@
     <insert id="insertBlogImage" parameterType="blogimgdto">
         INSERT ALL
         <foreach collection="imgSrcList" item="item" separator=" ">
-            INTO blog_image(URL, IMAGE_URL) VALUES 
+            INTO BLOG_IMAGE(URL, IMAGE_URL) VALUES 
             (#{url, jdbcType=VARCHAR}, #{item, jdbcType=VARCHAR} )
         </foreach>
         SELECT * FROM DUAL
@@ -99,5 +105,18 @@
         order by keyword
         ) a
         where a.sung = #{keyword}      
+    </select>
+    
+    <select id="selectBlog" parameterType="int" resultType="blogrankdto">
+        select b.URL, b.BLOG_NUMBER, b.RANK_SCORE, b.STORE_PHONE, b.DESCRIPTION, br.BLOG_WRITER_ID, b.TITLE, b.log_time
+        from blog b, blog_rank br
+        where b.URL=br.URL and
+        b.STORE_SEQ = #{storeSeq}
+        order by b.RANK_SCORE desc
+    </select>
+    <select id="selectBlogImg" parameterType="String" resultType="String">
+        select IMAGE_URL
+        from BLOG_IMAGE
+        where URL = #{blogUrl}
     </select>
 </mapper>

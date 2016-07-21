@@ -36,7 +36,6 @@ public class JosuChangeApi {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-
 		URL url = null;
 		try {
 			url = new URL(apiUrl);
@@ -62,8 +61,6 @@ public class JosuChangeApi {
 			sb.append(tempStr);
 		}
 		String xml = sb.toString();
-//		System.out.println(xml);
-//		StringMethod.getStringMethod().stringToTextFile(xml);
 		Document document = XmlParseDom.xmlPeraseDocument(xml);
 		NodeList NodeListAddress = XmlParseDom.getNodeList("//juso/jibunAddr", document);
 		if(NodeListAddress.item(0)==null){
@@ -92,7 +89,7 @@ public class JosuChangeApi {
 		List<BlogDto> newBlogDtoList = new ArrayList<BlogDto>();
 		for(int i=0;i<size;i++){
 			BlogDto blogDto = blogList.get(i);
-			newAddress= StringMethod.getStringMethod().stringToken(getNewAddres(blogDto.getOld_address()));
+			newAddress= StringMethod.getStringMethod().cutThatDong(getNewAddres(blogDto.getOld_address()));
 			blogDto.setNew_address(newAddress);
 			blogDto.setSearchWord(newAddress+" "+blogDto.getStore_name());
 			newBlogDtoList.add(blogDto);

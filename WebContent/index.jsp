@@ -112,7 +112,6 @@ function hide(elementid) {
 	        </div>
         </form>
     </header>
-
     <section class="bg-primary" id="about">
         <div class="container">
             <div class="row">
@@ -126,7 +125,6 @@ function hide(elementid) {
             </div>
         </div>
     </section>
-
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -149,6 +147,5 @@ function hide(elementid) {
         </div>
     </section>
 <script src="${root}/js/map/map.js"></script>	
-
 </body>
 </html>
