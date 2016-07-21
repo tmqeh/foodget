@@ -151,7 +151,7 @@ public class StringMethod {
 		return true;
 	}
 
-	public String stringToken(String str) {
+	public String cutThatDong(String str) {
 		str = str.replace("-", "");
 		StringTokenizer strToken = new StringTokenizer(str, " ");
 		int count = strToken.countTokens();

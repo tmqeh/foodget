@@ -144,16 +144,13 @@
 					</div>
 					<div class="col-sm-4">
 						<a href="javascript:viewStore('${slist.store_seq }');"><h2>${slist.store_name }</h2></a>
-						<h4>메뉴이름</h4><br>
+						<h4>${slist.store_category}</h4><br>
 						<h5>점수 | 좋아요 | 평가 | 블로그</h5>
 					</div>
 					<div class="col-sm-4 storepage_info">
 						<h5><span class="glyphicon glyphicon-map-marker"></span>&nbsp; ${slist.store_address }</h5><br>
 						<h5><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; ${slist.store_phone }</h5><br>
 					</div>
-					
-
-										
 					
 				</div>
 			</c:forEach>	

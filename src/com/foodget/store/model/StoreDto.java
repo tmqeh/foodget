@@ -1,6 +1,8 @@
 package com.foodget.store.model;
 
 public class StoreDto {
+	private String store_category;
+
 	private int store_seq;
 	private String store_name;
 	private String store_address;
@@ -23,7 +25,13 @@ public class StoreDto {
 	private int k_hot_taste;
 	private double store_longitude;
 	private double store_latitude;
+	public String getStore_category() {
+		return store_category;
+	}
 
+	public void setStore_category(String store_category) {
+		this.store_category = store_category;
+	}
 	public int getStore_seq() {
 		return store_seq;
 	}
