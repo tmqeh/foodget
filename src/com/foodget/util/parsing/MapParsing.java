@@ -242,8 +242,18 @@ public class MapParsing {
 		Elements contents2 = doc.select("span");
 		for(int i=0;i<contents2.size();i++){
 			Element content2 = contents2.get(i);
-			if("se_publishDate pcol2 fil5".equals(content2.className())){
+			String classname = content2.className();
+			if("se_publishDate pcol2 fil5".equals(classname)){
 				mapParsing.setLogDate(content2.text());
+				break;
+			}
+		}
+		if("".equals(mapParsing.getLogDate())){
+			Elements contents3= doc.select("p._postAddDate");
+			int size = contents3.size();
+			for(int i=0;i<size;i++){
+				Element content3 = contents3.get(i);
+				mapParsing.setLogDate(content3.text());
 				break;
 			}
 		}
@@ -456,4 +466,11 @@ public class MapParsing {
 	public void setblogUrl(String blogUrl) {
 		this.blogUrl = blogUrl;
 	}
+//	public static void main(String[] args) {
+//		if(mapParsing.startParsing("http://taijiseye.blog.me/220720306863")){
+//			System.out.println("낫 널");
+//		}else{
+//			System.out.println("널");
+//		}
+//	}
 }

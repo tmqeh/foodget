@@ -40,46 +40,7 @@ public class StoreController {
 	@RequestMapping(value="/storeInfo.html", method=RequestMethod.POST)
 	public ModelAndView storeInfo(@RequestParam("store_seq")int store_seq) {
 		ModelAndView mav = new ModelAndView();
-		StoreDto storeDto = storeService.selectStore(store_seq);
-		int storeSeq = storeDto.getStore_seq();
-		int selectStoreSeq = storeService.selectStoreSeq(storeSeq);
-		System.out.println("seq  :"+storeSeq);
-		System.out.println("디비에서 가져온 값 :"+selectStoreSeq);
-		List<BlogDto> blogList=null;
-		if(selectStoreSeq==0){
-			String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(storeDto.getStore_address()));
-			String storeTitle = storeDto.getStore_name();
-			String searchKeyword = newAddress+" "+storeTitle;
-			System.out.println(">>>>블로그 파싱 시작");
-			blogList = NaverApi.getNaverApi().blogInfo(searchKeyword,storeDto.getStore_phone(),storeSeq);
-			for(int i=0;i<blogList.size();i++){
-				BlogDto blogDto = new BlogDto();
-				blogDto = blogList.get(i);
-				BlogRankInfoDto	blogRankInfoDto = blogDto.getBlogRankInfoDto();
-				storeService.mergeBlog(blogDto);
-				storeService.insertBlogRank(blogRankInfoDto);
-				BlogImgInfoDto blogImgInfoDto = blogDto.getBlogRankInfoDto().getBlogImgInfoDto();
-				storeService.insertBlogImage(blogImgInfoDto);
-			}
-			System.out.println("끝");
-		}else{
-			System.out.println("노 파싱");
-		}
-		List<BlogRankInfoDto> blogRankList=null;
-		blogRankList = storeService.selectBlog(storeSeq);
-		int blogRankListSize = blogRankList.size();
-		List<String> imgList=null;
-		for(int i=0;i<blogRankListSize;i++){
-			BlogRankInfoDto blogRankInfoDto = new BlogRankInfoDto();
-			blogRankInfoDto = blogRankList.get(i);
-			BlogImgInfoDto blogImgInfoDto = new BlogImgInfoDto();
-			imgList = storeService.selectBlogImg(blogRankInfoDto.getUrl());
-			System.out.println(blogRankInfoDto.getUrl()+": "+imgList.size());
-			blogImgInfoDto.setImgSrcList(imgList);
-			blogRankInfoDto.setBlogImgInfoDto(blogImgInfoDto);
-			blogRankList.add(blogRankInfoDto);
-//			System.out.println(blogImgInfoDto.toString());
-		}
+		List<BlogRankInfoDto> blogRankList = storeService.showBlogOfStore(store_seq);
 		mav.addObject("blogRankList", blogRankList);
 		mav.setViewName("/store/storeinfo");
 		return mav;

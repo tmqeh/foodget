@@ -18,4 +18,5 @@ public interface StoreService {
 	public int selectStoreSeq(int storeSeq);
 	public List<BlogRankInfoDto> selectBlog(int storeSeq);
 	public List<String> selectBlogImg(String blogUrl);
+	public List<BlogRankInfoDto> showBlogOfStore(int store_seq);
 }

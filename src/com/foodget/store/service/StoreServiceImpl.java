@@ -6,6 +6,8 @@ import java.util.StringTokenizer;
 
 import org.json.simple.JSONObject;
 
+import com.foodget.store.api.JosuChangeApi;
+import com.foodget.store.api.NaverApi;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
@@ -95,5 +97,48 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<String> selectBlogImg(String blogUrl) {
 		return storeDao.selectBlogImg(blogUrl);
+	}
+
+	@Override
+	public List<BlogRankInfoDto> showBlogOfStore(int store_seq) {
+		StoreDto storeDto = selectStore(store_seq);
+		int storeSeq = storeDto.getStore_seq();
+		int selectStoreSeq = selectStoreSeq(storeSeq);
+		System.out.println("seq  :"+storeSeq);
+		List<BlogDto> blogList=null;
+		if(selectStoreSeq==0){
+			String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(storeDto.getStore_address()));
+			String storeTitle = storeDto.getStore_name();
+			String searchKeyword = newAddress+" "+storeTitle;
+			System.out.println("블로그 검색 키워드 :"+searchKeyword);
+			System.out.println(">>>>블로그 파싱 시작");
+			blogList = NaverApi.getNaverApi().blogInfo(searchKeyword,storeDto.getStore_phone(),storeSeq);
+			for(int i=0;i<blogList.size();i++){
+				BlogDto blogDto = new BlogDto();
+				blogDto = blogList.get(i);
+				BlogRankInfoDto	blogRankInfoDto = blogDto.getBlogRankInfoDto();
+				mergeBlog(blogDto);
+				insertBlogRank(blogRankInfoDto);
+				BlogImgInfoDto blogImgInfoDto = blogDto.getBlogRankInfoDto().getBlogImgInfoDto();
+				insertBlogImage(blogImgInfoDto);
+			}
+			System.out.println("끝");
+		}else{
+		}
+		List<BlogRankInfoDto> blogRankList=null;
+		blogRankList = selectBlog(storeSeq);
+		int blogRankListSize = blogRankList.size();
+		List<String> imgList=null;
+		
+		for(int i=0;i<blogRankListSize;i++){
+			BlogRankInfoDto blogRankInfoDto = new BlogRankInfoDto();
+			blogRankInfoDto = blogRankList.get(i);
+			BlogImgInfoDto blogImgInfoDto = new BlogImgInfoDto();
+			imgList = selectBlogImg(blogRankInfoDto.getUrl());
+			blogImgInfoDto.setImgSrcList(imgList);
+			blogRankInfoDto.setBlogImgInfoDto(blogImgInfoDto);
+			blogRankList.add(blogRankInfoDto);
+		}
+		return blogRankList;
 	}
 }

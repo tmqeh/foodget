@@ -90,6 +90,7 @@ public class NaverApi {
 		NodeList link = XmlParseDom.getNodeList("//item/link", document);
 		List<BlogDto> blogList = new ArrayList<BlogDto>();
 		for (int i = 0; i < link.getLength(); i++) {
+			System.out.println(link.item(i).getTextContent());
 			if(mapParsing.startParsing(link.item(i).getTextContent())){
 				BlogDto blogDto = new BlogDto();
 				blogDto = MapParsing.getMapParsing().getBlogDto();

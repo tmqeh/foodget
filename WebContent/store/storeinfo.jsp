@@ -57,7 +57,7 @@
 				<div class="col-sm-10" onclick="window.open('${blogRankDto.url}')" style="cursor:pointer">
 					<h4>${blogRankDto.title}</h4>
 					<h5>${blogRankDto.description}</h5>
-					<h6>by ${blogRankDto.blog_writer_id}, ${blogRankDto.log_time}</h6>
+					<h6>by ${blogRankDto.blog_writer_id}, ${blogRankDto.log_time.substring(0,10)}</h6>
 				</div>
 			</div>
 </c:forEach>
