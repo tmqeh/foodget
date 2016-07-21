@@ -11,6 +11,7 @@ import com.foodget.store.api.NaverApi;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
+import com.foodget.store.blog.model.SearchDto;
 import com.foodget.store.model.StoreDto;
 import com.foodget.store.model.dao.StoreDao;
 import com.foodget.utill.StringMethod;
@@ -87,6 +88,15 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
+	public void insertKeyword(String keyword) {
+		storeDao.insertKeyword(keyword);
+	}
+
+	@Override
+	public List<SearchDto> getSearchList(String keyword) {
+		return storeDao.getSearchList(keyword);	
+	}
+	
 	public int selectStoreSeq(int storeSeq) {
 		return storeDao.selectStoreSeq(storeSeq);
 	}

@@ -243,7 +243,6 @@ function onClickMap(e){
 	</form>
 </div>
 
-
 <script src="${root}/js/jquery.cookie.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -332,8 +331,6 @@ function getRoot(myLocation){
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
     }
 </script>
-
-
 
 <script src="${root}/js/map/map.js"></script>
 

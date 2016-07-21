@@ -8,6 +8,7 @@
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
+        <form id="storeinsertform" name ="storeinsertform" method="post" action="">
         <div class="navbar-header col-sm-3">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
@@ -16,9 +17,10 @@
         </div>
         
        	<div class="col-sm-6 searchbar">
-          <input id="keyword" type="text" class="search col-sm-10"  placeholder="예 : 구로디지털단지 김치찌개">
+          <input id="keyword" name="keyword" type="text" class="search col-sm-10"  placeholder="예 : 구로디지털단지 김치찌개">
           	<a id="searchbtn" class="search-btn col-sm-2"><img src="${root}/img/search.png" style="height:25px"></a>	                
 		</div>
+		</form>
 
 <!-- 비 로그인 -->
         <c:if test="${userInfo == null }">            
@@ -70,8 +72,6 @@
     <!-- /.container-fluid -->
 </nav>
 
-    
-    
     <!-- 회원 가입 Modal -->
 	<div id="joinModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog join-dialog">
@@ -113,11 +113,13 @@
 	
 	    <!-- Modal content-->
 	    <form name ="loginform" method="post" action="">
+	    <input type="hidden" name="kakaoJson" id="kakaoJson" value="">
+	    <input type="hidden" name="kakaoflag" id="kakaoflag" value="">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	      	<div id="loginfail" class="logincheck"><span class="glyphicon glyphicon-exclamation-sign"></span> 아이디와 비밀번호를 확인해주세요.</div>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #f9e000">카카오 계정으로 로그인</button>
+	        <a  id="kakao-btn" class="btn btn-primary" style="background-color: #ffeb00; color: #3c1e1e;">카카오 계정으로 로그인</a>
 	      </div>
 	      <div class="modal-body row join-modal-body">
 	        <input id="email_login" name="email" type="text" class="joinmodal-input" placeholder="이메일 주소" value="">
@@ -134,3 +136,4 @@
 	
 	  </div>
 	</div>
+<script src="${root}/js/member/kakaoAPI.js"></script>

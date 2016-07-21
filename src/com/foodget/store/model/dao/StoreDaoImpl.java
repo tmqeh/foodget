@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
+import com.foodget.store.blog.model.SearchDto;
 import com.foodget.store.model.StoreDto;
 
 public class StoreDaoImpl implements StoreDao {
@@ -58,6 +59,15 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
+	public void insertKeyword(String keyword) {
+		sqlSession.insert("com.foodget.store.model.dao.StoreDaoImpl.insertKeyword", keyword);	
+	}
+
+	@Override
+	public List<SearchDto> getSearchList(String keyword) {
+		return sqlSession.selectList("com.foodget.store.model.dao.StoreDaoImpl.search", keyword);
+	}
+
 	public int selectStoreSeq(int storeSeq) {
 		return sqlSession.selectOne("com.foodget.store.model.dao.StoreDaoImpl.selectStoreSeq", storeSeq);	
 	}

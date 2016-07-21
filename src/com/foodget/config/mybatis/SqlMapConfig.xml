@@ -12,6 +12,7 @@
         <typeAlias alias="list" type="java.util.List"/>
         <typeAlias alias="blogrankdto" type="com.foodget.store.blog.model.BlogRankInfoDto"/>
         <typeAlias alias="blogimgdto" type="com.foodget.store.blog.model.BlogImgInfoDto"/>
+        <typeAlias alias="searchdto" type="com.foodget.store.blog.model.SearchDto"/>
         
     </typeAliases>        
     <environments default="development">

@@ -78,7 +78,6 @@ public class MemberController {
 	@RequestMapping(value="/login.html", method=RequestMethod.POST)
 	public ModelAndView login(MemberDto memberDto, Model model, @RequestParam("kakaoJson") String kakaoJson, @RequestParam("kakaoflag") String  kakaoflag ) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("제이슨 : " + kakaoJson);
 		if(kakaoflag.equals("kakao")) {
 			memberDto = makeKakaoMemberDto(kakaoJson);
 			int cnt = memberService.idCheck(memberDto.getEmail());
