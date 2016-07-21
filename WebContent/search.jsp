@@ -55,6 +55,7 @@
 		<input type="hidden" id="store_seq"  name="store_seq" value="">
 	</form>
 </div>
+
 <script src="${root}/js/map/map.js"></script>
 
 <script>

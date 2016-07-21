@@ -8,19 +8,102 @@
 var loginFail = "${loginFail}";
 </script>
 <script src="${root}/js/member/member.js"></script>
+<script type="text/javascript">
+var checkFirst = false;
+var lastkeyword = "";
+var loopSendKeyoword = false;
+var firstKey = "";
+
+function startsearch() {
+   if(document.getElementById("keyword").value == "") {
+      checkFirst = false;
+   }
+
+   if(checkFirst == false) {
+      firstKey = "first";
+      loopSendKeyoword = true;
+      window.setTimeout("sendkeyword();", 50);
+   } else {
+      firstKey = "";
+   }
+   checkFirst = true;
+}
+
+function sendkeyword() {
+   if(loopSendKeyoword == false)
+      return;
+   
+   var keyword = document.getElementById("keyword").value;
+   if(keyword == "") {
+      checkFirst = false;
+      lastkeyword = "";
+      hide("search");
+   } else if(keyword != lastkeyword) {
+      lastkeyword = keyword;
+      if(lastkeyword != "") {
+         $.ajax({
+            type : 'POST',
+            dataType : 'json',
+            url : '${root}/store/autoSearch.html',
+            data : {'first' : firstKey, 'keyword' : lastkeyword},
+            success : function(data) {
+               showKeyword(data);
+            }
+         });
+      } else {
+         hide("search");
+      }
+   }
+   window.setTimeout("sendkeyword();", 50);
+}
+
+function showKeyword(data) {
+   var len = data.keylist.length;
+   var result = "";
+   if(len > 0) {
+      for(var i=0;i<len;i++) {
+         result += "<a>" + data.keylist[i].keyword+ "</a><br>";
+      }
+      var sl = document.getElementById("searchList");
+      sl.innerHTML = result;
+      show("search");
+   } else {
+      hide("search");
+   }   
+}
+function selectkeyword(keyword){
+    document.getElementById("keyword").value=keyword;
+    checkFirst= false;
+    loopSendKeyoword = false;
+    hide("search");
+}
+function show(elementid) {
+   var element = document.getElementById(elementid);
+   if(element)
+      element.style.display = "";
+}
+
+function hide(elementid) {
+   var element = document.getElementById(elementid);
+   if(element)
+      element.style.display = "none";
+}
+</script>
 
 <body id="page-top">
 <%@ include file="/common/header/header_main.jsp"%>
     <header>
     	<form id="storeinsertform" name ="storeinsertform" method="post" action="">
     		<input type="hidden" id="storeinfo"  name="storeinfo" value="">
-			<input type="hidden" id="addresskeyword"  name="addresskeyword" value="">
 	        <div class="header-content">
 	            <div class="header-content-inner row">
 	                <img src="${root}/img/logo-main.png"><hr>
 					<div class="row">
 						<div class="col-sm-2"></div>
-		                <input type="text" id="keyword" class="search col-sm-5"  placeholder="예 : 구로디지털단지 김치찌개" value="">
+		                <input type="text" id="keyword" name="keyword" class="search col-sm-5"  placeholder="예 : 구로디지털단지 김치찌개" onkeydown="javascript:startsearch();" value="" >
+		                <div class="search">
+		                	<div id="searchList"></div>
+		                </div>
 		                <a id="searchbtn" class="search-btn col-sm-1"><img src="${root}/img/search.png" style="height:25px"></a>	                
 		                <div class="col-sm-2 keyword-rank">실시간 검색어</div>
 		                <div class="col-sm-1"></div>
@@ -68,5 +151,4 @@ var loginFail = "${loginFail}";
 <script src="${root}/js/map/map.js"></script>	
 
 </body>
-
 </html>

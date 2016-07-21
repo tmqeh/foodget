@@ -18,8 +18,6 @@
 	<link href="${root}/css/bootstrap.css" rel="stylesheet">
 	
 	<!-- Custom Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	
 	<!-- Plugin CSS -->
 	<link href="${root }/css/jquery-ui.css" rel="stylesheet">
@@ -42,7 +40,7 @@
 	<script src="${root }/js/jquery-ui.js"></script>
 	
 	<!-- 다음지도 -->
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=6e72edfdffa122d2d95a77d76691f108&libraries=services"></script>
+	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=0eb86b00e8e9aeddcb40e702ac62d099&libraries=services"></script>
 	
 	
 	<!-- Bootstrap Core JavaScript -->

@@ -42,6 +42,7 @@
         INSERT (b.URL,b.BLOG_NUMBER,b.OLD_ADDRESS,b.NEW_ADDRESS,b.RANK_SCORE,b.STORE_SEQ,b.description)
         values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, 316,#{description})
     </update>
+    
     <insert id="insertBlogRank" parameterType="blogrankdto">
         MERGE INTO BLOG_RANK br
         USING dual
@@ -61,4 +62,42 @@
         </foreach>
         SELECT * FROM DUAL
     </insert>
+    
+    <update id="insertKeyword" parameterType="String">
+        merge into search s
+        using dual
+        on (s.keyword = #{keyword})
+        when matched then
+        update set
+        s.hit = s.hit+1
+        when not matched then
+        insert (keyword, hit)
+        values(#{keyword}, 1)
+    </update>
+    
+    <select id="search" parameterType="String" resultType="searchdto">
+        select keyword
+        from  ( 
+        select case when keyword &lt; 'ㄱ' then substr(keyword, 1, 1) 
+        when ascii('ㄱ') &lt;= ascii(keyword) and ascii(keyword)&lt;= ascii('ㅎ') then keyword 
+        when keyword &lt; '나' then 'ㄱ'
+        when keyword &lt; '다' then 'ㄴ'
+        when keyword &lt; '라' then 'ㄷ'
+        when keyword &lt; '마' then 'ㄹ'
+        when keyword &lt; '바' then 'ㅁ'
+        when keyword &lt; '사' then 'ㅂ'
+        when keyword &lt; '아' then 'ㅅ'
+        when keyword &lt; '자' then 'ㅇ'
+        when keyword &lt; '차' then 'ㅈ'
+        when keyword &lt; '카' then 'ㅊ'
+        when keyword &lt; '타' then 'ㅋ'
+        when keyword &lt; '파' then 'ㅌ'
+        when keyword &lt; '하' then 'ㅍ'
+        else 'ㅎ'
+        end as sung, keyword 
+        from search
+        order by keyword
+        ) a
+        where a.sung = #{keyword}      
+    </select>
 </mapper>

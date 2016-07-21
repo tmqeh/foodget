@@ -3,16 +3,20 @@ package com.foodget.store.controller;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodget.store.api.NaverApi;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
+import com.foodget.store.blog.model.SearchDto;
 import com.foodget.store.model.StoreDto;
 import com.foodget.util.parsing.MapParsing;
 import com.foodget.store.service.StoreService;
@@ -23,16 +27,18 @@ public class StoreController {
 	
 	private StoreService storeService;
 	
+	private List<SearchDto> searchlist;
+	
 	public void setStoreService(StoreService storeService) {
 		this.storeService = storeService;
 	}
 	@RequestMapping(value="/storeinsert.html", method=RequestMethod.POST)
-	public ModelAndView store(@RequestParam("storeinfo")String storeinfo, @RequestParam("addresskeyword")String keyword) {
-//		System.out.println("storeinfo = " + storeinfo);
+	public ModelAndView store(@RequestParam("storeinfo")String storeinfo, @RequestParam("keyword")String keyword) {
 		ModelAndView mav = new ModelAndView();
+		storeService.insertKeyword(keyword);
 		List<StoreDto> slist = storeService.StoreSaveAndLoad(storeinfo);
 		mav.addObject("slist", slist);
-		mav.setViewName("/search");
+		mav.setViewName("/search");		
 		return mav;
 	}
 
@@ -43,6 +49,36 @@ public class StoreController {
 		mav.addObject("storeInfo", storeDto);
 		mav.setViewName("/store/storeinfo");
 		return mav;
+	}
+	
+	@RequestMapping(value="/autoSearch.html", method=RequestMethod.POST)
+	public @ResponseBody String storesearch(@RequestParam("keyword")String keyword, @RequestParam("first")String first) {
+		JSONObject json = new JSONObject();
+		JSONArray jsonarr = new JSONArray();
+		
+		if("first".equals(first)) {
+			searchlist = storeService.getSearchList(keyword);
+			System.out.println("크기" + searchlist.size());
+			for(SearchDto searchdto : searchlist) {
+				JSONObject jo = new JSONObject();
+				jo.put("keyword", searchdto.getKeyword());
+				System.out.println(jo.get("keyword"));
+				jsonarr.add(jo);
+			}
+		} else {
+			searchlist = storeService.getSearchList(keyword);
+			for(SearchDto searchdto : searchlist) {
+				String str = searchdto.getKeyword();
+				if(str.toUpperCase().startsWith(keyword.toUpperCase())) {
+					JSONObject jo = new JSONObject();
+					jo.put("keyword", searchdto.getKeyword());
+					System.out.println("else " + jo.get("keyword"));
+					jsonarr.add(jo);
+				}
+			}
+		}
+		json.put("keylist", jsonarr);
+		return json.toJSONString();
 	}
 	
 	@RequestMapping(value="/bloglist.html", method=RequestMethod.POST)

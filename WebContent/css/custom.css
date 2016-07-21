@@ -214,6 +214,11 @@
 	height: 31px;
     background-color: #03a9f4;
     padding: 3px;
+    cursor: pointer;
+}
+
+.search-btn:hover{
+    background-color: #3ebdf7;
 }
 
 .keyword-rank {
