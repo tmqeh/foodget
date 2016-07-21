@@ -3,16 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@ include file="/common/common.jsp"%>
-
 <body id="page-top">
 <%@ include file="/common/header/header_other.jsp"%>
     
 <!-- -------------------------------------------더미값 수정 작업 필요함---------------------------------------------- -->
+
+
 <div id="map" style="width:100%;height:450px; position:relative;overflow:hidden;"></div>
 <div class="storeinfo row">
 	<div class="col-md-8 col-lg-offset-2">
     	<div class="row">
-	    	<div class="storetitle col-md-8"> ${storeInfo.store_name }</div>		        		
+	    	<div class="storetitle col-md-8"> ${blogDto.store_name}</div>		        		
 	        <div class="storetitle col-md-4">
 	        	<a><span class="glyphicon glyphicon-star"></span>&nbsp; 비교하기</a>
 	        	<a><span class="glyphicon glyphicon-heart"></span>&nbsp; 좋아요</a>
@@ -24,12 +25,12 @@
 				<h5><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; 메뉴</h5>
         	</div>
         	<div class="col-md-6 storedetail">
-	        	<h5><span class="glyphicon glyphicon-map-marker"></span>&nbsp; ${storeInfo.store_address}</h5>
-				<h5><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; ${storeInfo.store_phone }</h5>
+	        	<h5><span class="glyphicon glyphicon-map-marker"></span>&nbsp; ${blogDto.old_address}</h5>
+				<h5><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; ${blogDto.store_phone }</h5>
         	</div>      			
         </div>
 		<div class="storescore">
-	     	<div class="col-xs-2">1<br><label>랭크</label></div>
+	     	<div class="col-xs-2">랭킹점수<br><label>랭킹</label></div>
 	     	<div class="col-xs-2">79<br><label>점수</label></div>
 	     	<div class="col-xs-2">65<br><label>좋아요</label></div>
 	     	<div class="col-xs-2">4.7<br><label>별점</label></div>
@@ -37,7 +38,6 @@
 		</div>	        					        		
 	</div>
 </div>	        
-       	
 <div class="store-bg-primary row">
 	<div class="col-md-8 col-lg-offset-2 storepage">
 		<div class="row">
@@ -47,15 +47,20 @@
 			<div class="storeimgbox"></div>			
 		</div>
 		<div class="storeblog row">
-			<h2>추천 블로그</h2>			
+			<h2>추천 블로그</h2>		
+<c:forEach items="${blogRankList}" var="blogRankDto">	
 			<div class="blogbox">
-				<div class="col-sm-2 blogimgbox"></div>
-				<div class="col-sm-10">
-					<h4>블로그제목</h4>
-					<h5>블로그내용</h5>
-					<h6>by 닉네임 2016-06-16</h6>
+				<div class="col-sm-2 blogimgbox">
+				<c:set var="size" value="${blogRankDto.blogImgInfoDto.imgSrcList.size()}"></c:set>
+				<img src="${blogRankDto.blogImgInfoDto.imgSrcList.get(0)}" width="180" height="98">
+				</div>
+				<div class="col-sm-10" onclick="window.open('${blogRankDto.url}')" style="cursor:pointer">
+					<h4>${blogRankDto.title}</h4>
+					<h5>${blogRankDto.description}</h5>
+					<h6>by ${blogRankDto.blog_writer_id}, ${blogRankDto.log_time}</h6>
 				</div>
 			</div>
+</c:forEach>
 		</div>
 	</div>
 <!-- -------------------------------------------더미값 수정 작업 필요함---------------------------------------------- -->

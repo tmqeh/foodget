@@ -29,7 +29,6 @@ var loginFail = "${loginFail}";
 	        </div>
         </form>
     </header>
-
     <section class="bg-primary" id="about">
         <div class="container">
             <div class="row">
@@ -43,7 +42,6 @@ var loginFail = "${loginFail}";
             </div>
         </div>
     </section>
-
     <section id="contact">
         <div class="container">
             <div class="row">

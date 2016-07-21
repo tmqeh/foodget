@@ -12,12 +12,14 @@ public class BlogRankInfoDto extends BlogDto{
 	public String getBlog_writer_id() {
 		return blog_writer_id;
 	}
+	
 	@Override
 	public String toString() {
-		return " [url : "+getUrl()+"]BlogRankInfoDto [blog_writer_id=" + blog_writer_id + ","
-				+ " comment_count=" + comment_count
-				+ ", body_lenth=" + body_lenth + ", image_count=" + image_count + "]";
+		return "BlogRankInfoDto [blog_writer_id=" + blog_writer_id + ", comment_count=" + comment_count
+				+ ", body_lenth=" + body_lenth + ", image_count=" + image_count + ", blogImgInfoDto=" + blogImgInfoDto
+				+ "]";
 	}
+
 	public void setBlog_writer_id(String blog_writer_id) {
 		this.blog_writer_id = blog_writer_id;
 	}

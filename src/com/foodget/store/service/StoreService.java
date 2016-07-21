@@ -15,4 +15,7 @@ public interface StoreService {
 	public void insertBlogRank(BlogRankInfoDto blogRankInfoDto);
 	public void insertBlogImage(BlogImgInfoDto blogImgInfoDto);
 	public List<StoreDto> StoreSaveAndLoad(String storeinfo);	
+	public int selectStoreSeq(int storeSeq);
+	public List<BlogRankInfoDto> selectBlog(int storeSeq);
+	public List<String> selectBlogImg(String blogUrl);
 }

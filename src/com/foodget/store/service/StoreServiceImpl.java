@@ -81,4 +81,19 @@ public class StoreServiceImpl implements StoreService {
 	public StoreDto selectStore(int store_seq) {
 		return storeDao.selectStore(store_seq);
 	}
+
+	@Override
+	public int selectStoreSeq(int storeSeq) {
+		return storeDao.selectStoreSeq(storeSeq);
+	}
+
+	@Override
+	public List<BlogRankInfoDto> selectBlog(int storeSeq) {
+		return storeDao.selectBlog(storeSeq);
+	}
+
+	@Override
+	public List<String> selectBlogImg(String blogUrl) {
+		return storeDao.selectBlogImg(blogUrl);
+	}
 }

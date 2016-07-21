@@ -39,9 +39,14 @@
         UPDATE SET
         b.STORE_PHONE = #{store_phone}
         WHEN NOT MATCHED THEN
-        INSERT (b.URL,b.BLOG_NUMBER,b.OLD_ADDRESS,b.NEW_ADDRESS,b.RANK_SCORE,b.STORE_SEQ,b.description)
-        values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, 316,#{description})
+        INSERT (b.URL,b.BLOG_NUMBER,b.OLD_ADDRESS,b.NEW_ADDRESS,b.RANK_SCORE,b.STORE_SEQ,b.description,b.store_phone,b.title,b.log_time)
+        values (#{url}, #{blog_number}, #{old_address}, #{new_address}, #{rank_score}, #{store_seq},#{description},#{store_phone},#{title},#{log_time})
     </update>
+    <select id="selectStoreSeq" parameterType="int" resultType="int">
+        select count(store_seq)
+        from blog
+        where store_seq = #{storeSeq}
+    </select>
     <insert id="insertBlogRank" parameterType="blogrankdto">
         MERGE INTO BLOG_RANK br
         USING dual
@@ -56,9 +61,21 @@
     <insert id="insertBlogImage" parameterType="blogimgdto">
         INSERT ALL
         <foreach collection="imgSrcList" item="item" separator=" ">
-            INTO blog_image(URL, IMAGE_URL) VALUES 
+            INTO BLOG_IMAGE(URL, IMAGE_URL) VALUES 
             (#{url, jdbcType=VARCHAR}, #{item, jdbcType=VARCHAR} )
         </foreach>
         SELECT * FROM DUAL
     </insert>
+    <select id="selectBlog" parameterType="int" resultType="blogrankdto">
+        select b.URL, b.BLOG_NUMBER, b.RANK_SCORE, b.STORE_PHONE, b.DESCRIPTION, br.BLOG_WRITER_ID, b.TITLE, b.log_time
+        from blog b, blog_rank br
+        where b.URL=br.URL and
+        b.STORE_SEQ = #{storeSeq}
+        order by b.RANK_SCORE desc
+    </select>
+    <select id="selectBlogImg" parameterType="String" resultType="String">
+        select IMAGE_URL
+        from BLOG_IMAGE
+        where URL = #{blogUrl}
+    </select>
 </mapper>

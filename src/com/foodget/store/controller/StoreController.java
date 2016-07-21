@@ -22,6 +22,7 @@ import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
 import com.foodget.store.model.StoreDto;
 import com.foodget.util.parsing.MapParsing;
+import com.foodget.utill.StringMethod;
 import com.foodget.store.service.StoreService;
 
 @Controller
@@ -47,7 +48,46 @@ public class StoreController {
 	public ModelAndView storeInfo(@RequestParam("store_seq")int store_seq) {
 		ModelAndView mav = new ModelAndView();
 		StoreDto storeDto = storeService.selectStore(store_seq);
-		mav.addObject("storeInfo", storeDto);
+		int storeSeq = storeDto.getStore_seq();
+		int selectStoreSeq = storeService.selectStoreSeq(storeSeq);
+		System.out.println("seq  :"+storeSeq);
+		System.out.println("디비에서 가져온 값 :"+selectStoreSeq);
+		List<BlogDto> blogList=null;
+		if(selectStoreSeq==0){
+			String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(storeDto.getStore_address()));
+			String storeTitle = storeDto.getStore_name();
+			String searchKeyword = newAddress+" "+storeTitle;
+			System.out.println(">>>>블로그 파싱 시작");
+			blogList = NaverApi.getNaverApi().blogInfo(searchKeyword,storeDto.getStore_phone(),storeSeq);
+			for(int i=0;i<blogList.size();i++){
+				BlogDto blogDto = new BlogDto();
+				blogDto = blogList.get(i);
+				BlogRankInfoDto	blogRankInfoDto = blogDto.getBlogRankInfoDto();
+				storeService.mergeBlog(blogDto);
+				storeService.insertBlogRank(blogRankInfoDto);
+				BlogImgInfoDto blogImgInfoDto = blogDto.getBlogRankInfoDto().getBlogImgInfoDto();
+				storeService.insertBlogImage(blogImgInfoDto);
+			}
+			System.out.println("끝");
+		}else{
+			System.out.println("노 파싱");
+		}
+		List<BlogRankInfoDto> blogRankList=null;
+		blogRankList = storeService.selectBlog(storeSeq);
+		int blogRankListSize = blogRankList.size();
+		List<String> imgList=null;
+		for(int i=0;i<blogRankListSize;i++){
+			BlogRankInfoDto blogRankInfoDto = new BlogRankInfoDto();
+			blogRankInfoDto = blogRankList.get(i);
+			BlogImgInfoDto blogImgInfoDto = new BlogImgInfoDto();
+			imgList = storeService.selectBlogImg(blogRankInfoDto.getUrl());
+			System.out.println(blogRankInfoDto.getUrl()+": "+imgList.size());
+			blogImgInfoDto.setImgSrcList(imgList);
+			blogRankInfoDto.setBlogImgInfoDto(blogImgInfoDto);
+			blogRankList.add(blogRankInfoDto);
+//			System.out.println(blogImgInfoDto.toString());
+		}
+		mav.addObject("blogRankList", blogRankList);
 		mav.setViewName("/store/storeinfo");
 		return mav;
 	}
@@ -55,20 +95,6 @@ public class StoreController {
 	@RequestMapping(value="/bloglist.html", method=RequestMethod.POST)
 	public ModelAndView blogList(@RequestParam("blogSearch") String blogSearch, @RequestParam("store_phone") String store_phone){
 		ModelAndView mav = new ModelAndView();
-		System.out.println("시작");
-		List<BlogDto> blogList = NaverApi.getNaverApi().blogInfo(blogSearch,store_phone);
-		for(int i=0;i<blogList.size();i++){
-			BlogDto blogDto = new BlogDto();
-			blogDto = blogList.get(i);
-			BlogRankInfoDto	blogRankInfoDto = blogDto.getBlogRankInfoDto();
-			storeService.mergeBlog(blogDto);
-			storeService.insertBlogRank(blogRankInfoDto);
-			BlogImgInfoDto blogImgInfoDto = blogDto.getBlogRankInfoDto().getBlogImgInfoDto();
-			storeService.insertBlogImage(blogImgInfoDto);
-		}
-		System.out.println("끝");
-		mav.addObject("blogList", blogList);
-		mav.setViewName("/blogList");
 		return mav;
 	}
 	@RequestMapping(value="viewImg.html", method=RequestMethod.POST )
@@ -90,16 +116,4 @@ public class StoreController {
 		mav.setViewName("/hojin_Test/viewImg");
 		return mav;
 	}
-	
-	public JSONObject stringToJson(String data) {
-	      JSONObject json = new JSONObject();
-	      Object obj = null;
-	      try {
-	         obj = JSONValue.parseWithException(data);
-	         json = (JSONObject) obj;
-	      } catch (ParseException e) {
-	         e.printStackTrace();
-	      }
-	      return json;
-	   }
 }

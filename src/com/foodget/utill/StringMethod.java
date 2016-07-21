@@ -151,7 +151,7 @@ public class StringMethod {
 		return true;
 	}
 
-	public static String stringToken(String str) {
+	public String stringToken(String str) {
 		str = str.replace("-", "");
 		StringTokenizer strToken = new StringTokenizer(str, " ");
 		int count = strToken.countTokens();

@@ -42,7 +42,7 @@
 	<script src="${root }/js/jquery-ui.js"></script>
 	
 	<!-- 다음지도 -->
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=6e72edfdffa122d2d95a77d76691f108&libraries=services"></script>
+	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=0eb86b00e8e9aeddcb40e702ac62d099&libraries=services"></script>
 	
 	
 	<!-- Bootstrap Core JavaScript -->

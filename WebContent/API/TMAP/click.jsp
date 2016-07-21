@@ -61,7 +61,6 @@ function onClickMap(e){
     markers = new Tmap.Layer.Markers( "MarkerLayer" );
     map.addLayer(markers);
      
-     
     var marker = new Tmap.Marker(new Tmap.LonLat(lonlat.lon, lonlat.lat), icon);
     markers.addMarker(marker);
     

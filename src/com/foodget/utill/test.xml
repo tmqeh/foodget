@@ -1,23 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<results>
-    <common>
-        <totalCount>1</totalCount>
-        <currentPage>1</currentPage>
-        <countPerPage>10</countPerPage>
-        <errorCode>0</errorCode>
-        <errorMessage>정상</errorMessage>
-    </common>
-    <juso>
-        서울특별시 구로구 구로동 + 
-        <roadAddr><![CDATA[서울특별시 구로구 도림천로 477 (구로동)]]></roadAddr>
-        <roadAddrPart1><![CDATA[서울특별시 구로구 도림천로 477]]></roadAddrPart1>
-        <roadAddrPart2><![CDATA[ (구로동)]]></roadAddrPart2>
-        <jibunAddr><![CDATA[서울특별시 구로구 구로동  810-3 구로디지털단지역]]></jibunAddr>
-        <engAddr><![CDATA[477, Dorimcheon-ro, Guro-gu, Seoul]]></engAddr>
-        <zipNo><![CDATA[08391]]></zipNo>
-        <admCd><![CDATA[1153010200]]></admCd>
-        <rnMgtSn><![CDATA[115303116011]]></rnMgtSn>
-        <bdMgtSn><![CDATA[1153010200108100003000001]]></bdMgtSn>
-        <detBdNmList><![CDATA[2호선]]></detBdNmList>
-    </juso>
-</results>
+<rss version="2.0">
+    <channel>
+        <title>Naver Open API - blog ::'서울특별시 중구 다동 남포면옥'</title>
+        <link>http://search.naver.com</link>
+        <description>Naver Search Result</description>
+        <lastBuildDate>Tue, 19 Jul 2016 17:51:11 +0900</lastBuildDate>
+        <total>1229</total>
+        <start>1</start>
+        <display>10</display>
+        <item>
+            <title>&lt;b&gt;남포면옥&lt;/b&gt; (&lt;b&gt;서울&lt;/b&gt; &lt;b&gt;다동&lt;/b&gt;), 동치미와
+                어복쟁반</title>
+            <link>http://openapi.naver.com/l?AAACWMy27CMBBFv+ZmEwnhycteZGEHW0XQInXVLVCXAAkuwSDx9x0XaaQ5c+foXu9+erawHWQJ1SVQGkbCLiAZFKyBKdI3OYadPJFmW8CyUUGnyKQnpwkclMrzV0jQrzLHXkq0gvkvUxK6yvrJ/7R9jL8oNMjx7IZwmF22Dz/N9mHk4NZvhxAjCvfpv4+T3zMu1uEAqln9CHwRzRtR1iUJKrPYMkolJDWCiiob2/Nm9b7cPC62eTuuwhd3uvised3HUzfcuOAP4htDLAgBAAA=</link>
+            <description>&lt;b&gt;다동&lt;/b&gt;에 노포가 많다고는 하지만 내가 가는 곳은 여기 밖에 없는 것 같다. 아, 2차로 골뱅이랑
+                맥주... 정말 불법이라면 동참하면 안되는 건데.. &lt;b&gt;남포면옥&lt;/b&gt; &lt;b&gt;서울특별시 중구&lt;/b&gt;
+                을지로3길 24 전화 상세보기</description>
+            <bloggername>동굴에서 그린 그림</bloggername>
+            <bloggerlink>http://blog.naver.com/shalott</bloggerlink>
+        </item>
+        <item>
+            <title>시청 &lt;b&gt;다동&lt;/b&gt; 나들이 : &lt;b&gt;남포면옥&lt;/b&gt;</title>
+            <link>http://openapi.naver.com/l?AAACWMy26DMBBFv+ayQYpqG7BnwcLmoVZCjZQusibgJlGhUItGTb++40aaxZ0zZ+7Xtw/3Ek0Fk4GqGMjCGTQ1DAdC4+BUvEbHsZPGZNkWaNjIYSNy8cg0hhZEafqAEvZR1rIXiSW4/zIysHlyCf69vGzbCmUhW57TtJx3n/3Nh92wzAzm62+/9uFDQLUHP16DHzaoulvOkAXLrwtvUj7pQgrKtdDJVoqsMCSM1EKqIpnLjKaX/Lmrj+PPOmk/HEcu3t/eTveuavj9D5p0LGwIAQAA</link>
+            <description>조금 힘들 수도 있겠지만, 비냉 시킨 한분 빼고는 다들 만족했다. 다만 사람이 많아서 대기 시간이 있다는 것과 그다지 위생적인 것
+                같지는 않았다..'ㅅ' &lt;b&gt;남포면옥&lt;/b&gt; &lt;b&gt;서울특별시 중구&lt;/b&gt; 을지로3길 24 전화
+                상세보기</description>
+            <bloggername>미자박 프롬 엉클 :3</bloggername>
+            <bloggerlink>http://blog.naver.com/mizapark1</bloggerlink>
+        </item>
+        <item>
+            <title>&lt;b&gt;중구다동&lt;/b&gt;맛집 &amp;quot;&lt;b&gt;남포면옥&lt;/b&gt;&amp;quot;</title>
+            <link>http://openapi.naver.com/l?AAACWMyw6CMBBFv+ayISG2PGwXLNoCO6PxDwwUwUh4WIz49U4lmcXJuSczr3bZcpQGIoE0HqSCFigLCAKJUkPHfvWNpib0pKhmKKlIobzSfiTroYKUYbhLDrU/q6jzRkno/zMpoNKgW2ybd85NiBV4RXebbNN/Ite/3LhsUT0OJJnggctZkglJeGQ8zoIhn5trlk32+W63s6lNsYLrB7t878nhNCIufhetgwHeAAAA</link>
+            <description>ㅜㅜ 오전에 출근해서 일하다 출근한 직원들과 함께 &lt;b&gt;중구 다동&lt;/b&gt;에 있는
+                &amp;quot;&lt;b&gt;남포면옥&lt;/b&gt;&amp;quot;에 갔습니다.... &lt;b&gt;서울특별시 중구&lt;/b&gt; 명동
+                | &lt;b&gt;남포면옥&lt;/b&gt; 도움말 Daum 지도 ' 음식점 ' 카테고리의 다른 글 양재동 '연탄갈비... </description>
+            <bloggername>INFORMATION FACTORY</bloggername>
+            <bloggerlink>http://apedix.tistory.com/</bloggerlink>
+        </item>
+        <item>
+            <title>[학동역 맛집/&lt;b&gt;남포면옥&lt;/b&gt;] - 평양냉면 입문자를 위한 코스</title>
+            <link>http://openapi.naver.com/l?AAACWMy07DMBBFv+ZmE6mK7Tw8iyzs1hELhARUILFLW5MEmppaoVL79YypNIs7Z87c86+P1xZuDV2C1imQgdVwG2gOBGdhVbomx7KTp2TYFnBsVDAJ2XRkmkIHojy/QwlzL+vYS8QQ7H8ZaZgqG6P/bMdl+YEykB3P7hiG1am/+Ljah5nBHMLpOA3jQkUF1b34wxT9foHaPIYBsmb/KfAmZdHUlSobWYhsaUVZaxJaNkKqOpvbA93O35D2q79+XJptfChv/ev789a/2cnx+x8fB6HXCwEAAA==</link>
+            <description>혹시 같은 곳인가 궁금해서 찾아보니 &amp;quot;&lt;b&gt;남포면옥&lt;/b&gt;이라는 상호는 약 40년 전에
+                &lt;b&gt;서울특별시 중구 다동&lt;/b&gt;에서 개업한 &lt;b&gt;남포면옥&lt;/b&gt;에서 유래한다.
+                &lt;b&gt;남포면옥&lt;/b&gt; 강남점은 2001년 대원각(大苑閣)에서 운영하던 강남분점 대원... </description>
+            <bloggername>진화하는 블로그</bloggername>
+            <bloggerlink>http://blog.naver.com/moonlight905</bloggerlink>
+        </item>
+        <item>
+            <title>[&lt;b&gt;중구 다동&lt;/b&gt;] &lt;b&gt;남포면옥&lt;/b&gt;</title>
+            <link>http://openapi.naver.com/l?AAACWMTY+CMBRFf81lQ2Joi512waJViAudGGfjzghW0WhBxA/89fOqeW9xe97pvd5dN2TIJ1Ap9CQEbWAV8ikUBY3cwopwDY4lJw7JkM2QkzGGCciGI9EQCmgdx1/IYb5lBXmBGA37KdMKZhzVndtndd+3EAa8oC3PzWHktw/XjarmQmC39X7Y3OqjhyhWbnfsXNVDTOfNAVyS/dvQiyUsSaRMaaI+Y6lUmin+w7iQ0SV7svVrKNulWd9PbP/6U28qnnnRLkq+oN//IdWDJAgBAAA=</link>
+            <description>모여 &lt;b&gt;남포면옥&lt;/b&gt;에 다녀왔습니다. 을지로입구역 2번 출구 하나은행 본점 뒷골목.. 요즘은 흔히 볼수
+                없는... 이번 겨울은 어복쟁반과 좀 친해져보고 싶습니다... 주소 : &lt;b&gt;서울특별시 중구 다동&lt;/b&gt; 125 전화번호 :
+                02-777-3131</description>
+            <bloggername>Smokie's World</bloggername>
+            <bloggerlink>http://blog.naver.com/danny_shin</bloggerlink>
+        </item>
+        <item>
+            <title>&lt;b&gt;남포면옥&lt;/b&gt; -- 평양냉면 기행 첫번째이야기(&lt;b&gt;중구다동&lt;/b&gt;)</title>
+            <link>http://openapi.naver.com/l?AAACWMy07DMBBFv+ZmE6mKX4lnkYXdOgipgMQmYlmKaXi0AScg+e8ZU2kWd86cud8/MeUeYQurQdsSyMFbhB0sB0Lw8Kpci+PZqUtybAsENgxcQb4cmZYwgKiur1DCXcsG9gpxBP9fRhbOVFOKr/20rl9QDnLgef6cT5vL4TemzXE+M8jLkoVUAmp4jC9vKR5XqN1+PkG27N7PvJmm0Q1Rp7uuWnuhW0vCyo7f2urch9EcHvL+AunTzd3ydBu1WT/y+2jGyfL3H1gL3UYGAQAA</link>
+            <description>&amp;lt;맛집정보&amp;gt; &lt;b&gt;남포면옥&lt;/b&gt; 주소 // &lt;b&gt;서울특별시 중구
+                다동&lt;/b&gt; 125 가는길 // 을지로입구역 1번출구 하나은행끼고 우회전 정면 신라약국골목 안쪽 주차불가(인근유료주차장...1급지이기 때문에
+                주차료가 무지 비싸다) 전화... </description>
+            <bloggername>株＊食＊여행</bloggername>
+            <bloggerlink>http://blog.naver.com/yssy1231</bloggerlink>
+        </item>
+        <item>
+            <title>[&lt;b&gt;서울&lt;/b&gt; / &lt;b&gt;중구&lt;/b&gt;] &lt;b&gt;남포면옥&lt;/b&gt;, 지극히 개인적인
+                느낌</title>
+            <link>http://openapi.naver.com/l?AAACWMy2rDMBBFv+Z6YwjRw45m4YWUWIFSSikxtNm5sRyX+JEaJ9B+fUcNzOLOmTP3+xbmnwLlFkaDtjGQhTModzAcCKWDU/EaHcdOGpNlW6BkI4ONyMUj0xg8iNL0ASXso8yzF4kluP8yMrBZ0s2hLbpluUJZSM/z2U/n1Vjfw7w6TQOD30s9Nr1cQ/m30HzN4bRA7Z6nM2TO7svEm5TrjdCZJqV1shRC54aEkRshVZ4MhRmrfX29Vwdd5Yfhtf1ou5s/vj/1jebnP8UzNmIFAQAA</link>
+            <description>첨부해요ㅎ &lt;b&gt;남포면옥&lt;/b&gt; &lt;b&gt;서울특별시 중구&lt;/b&gt; 을지로3길 24 전화 상세보기
+                골목에 보입니다. 저렇게ㅎㅎ 사실 기대를 별로 하지 않았어요. 이너넷에 조사해보니 호불호가 갈리는 레스토랑이더라고요. 앉으면 주셔요... </description>
+            <bloggername>C'est la vie</bloggername>
+            <bloggerlink>http://blog.naver.com/zkandl20</bloggerlink>
+        </item>
+        <item>
+            <title>평양냉면, 동치미 냉면 &lt;b&gt;다동&lt;/b&gt; '&lt;b&gt;남포면옥&lt;/b&gt;'</title>
+            <link>http://openapi.naver.com/l?AAACWMy26DMBREv2bYIEXYDtResLB5VVXVKkSRkiUQJ0QpOKGUqn/f60S6i7lnjub+Y6e/FEUGuYbKfFAaRqLIISkoFAZG+NY7hpzQJ002Q0FGDO2R8SVRH0ooFYZPyKGfYyV5nmgF8xhTEjoO+sme0n6ebxAavKRrv9x5NTaLnVadGwiMzdh0zl0hytoeL5PtZoj83Z3BE3I/HH2cRxGXLBFCRMGcsnUiFZP8hXGRBEO6rz+j7W1hr79tO+wO39Vp0+t79tZVtJr/AxSKpkAFAQAA</link>
+            <description>한그릇 가볍게 먹으면 그냥 그저 무난한 정도 동치미가 한참 대충 담가도 맛있을 철이었다면 어땠을까 싶기도 하네요.
+                &lt;b&gt;남포면옥&lt;/b&gt; &lt;b&gt;서울특별시 중구 다동&lt;/b&gt; 125번지 02-777-3131 오전 11시반~오후
+                10시까지,명절당일만 휴무</description>
+            <bloggername>Nana's kitchen</bloggername>
+            <bloggerlink>http://blog.naver.com/nanacook</bloggerlink>
+        </item>
+        <item>
+            <title>[&lt;b&gt;서울&lt;/b&gt;맛집] &lt;b&gt;중구 다동 남포면옥&lt;/b&gt;
+                &amp;quot;어복쟁반&amp;quot;</title>
+            <link>http://openapi.naver.com/l?AAACWMvQqDMBRGn+ZzEQTjX+7gkGiEFjo56G61OqhVI8G3b1LhDofzHe529vuVQxXgMahwQAKSQ5XgFghKQkZudY20je9I2DqEskUC4ZR0o7UOKhD5/i0ZxP2ssp0zgiD/z4hDJN6490M+av1FJMAqe9pMy2FWE+jp0Ot+Bd06W81SYpTEns7DOOUUcpaFLEq9OT9f767LlqHp27o2F5h8tsXWNJPqPw9E5Q/aZITl5AAAAA==</link>
+            <description>퇴근 동료들과 맛집 탐험키로 하여 회사 인근에 있는 &lt;b&gt;다동&lt;/b&gt;
+                &amp;quot;&lt;b&gt;남포면옥&lt;/b&gt;&amp;quot;을 찾았습니다. 외관부터 내공이 있어 보이는 곳입니다.
+                &lt;b&gt;남포면옥&lt;/b&gt;은 &lt;b&gt;서울&lt;/b&gt;에서 유명하다 하는 평양식 냉면집과 어깨를 나란히 할 정도로... </description>
+            <bloggername>Twins Family Blog</bloggername>
+            <bloggerlink>http://twinswow.tistory.com/</bloggerlink>
+        </item>
+        <item>
+            <title>(&lt;b&gt;서울&lt;/b&gt; &lt;b&gt;중구 다동&lt;/b&gt;) &lt;b&gt;남포면옥&lt;/b&gt;
+                (어복쟁반)</title>
+            <link>http://openapi.naver.com/l?AAACWMy2rDMBBFv+Z6YwjRyA/NwgspkaHQFvqgDdm5jmoHkip13YL79R01MIs7Z87cz+8wLQ38BqYAb1JgC2fgtzASGN7B6XRNjhMnT8mKreDFKGETcukoNIUWzHl+hQR7LWvFS8Qy3H8ZG9gyG6fw3ozzfIG2oFbm7RSH1Uf3E6ZVH88CLp3SA3T7GA7HKfQz9PY2DqBKxPsoG9G6LgtdrGuibG5UURlWhmpFusrOzRKXun+9Gfc7//v08OzMS7fnw101fHl5/gOTbY+wAgEAAA==</link>
+            <description>&lt;b&gt;남포면옥&lt;/b&gt; 무교동에 있을땐 간단히 가서 냉면도 먹구 갈비탕도 먹었는데 명동쪽으로 이사오고 나서는 갈일이
+                없었당 그럼에도 불구하고 이날 &lt;b&gt;남포면옥&lt;/b&gt;?沮? 굳이 행차하신 이유는 아파서 ㅠㅠ 국외출장에서... </description>
+            <bloggername>출장가서 밥 찾아 먹기</bloggername>
+            <bloggerlink>http://blog.naver.com/pa13g</bloggerlink>
+        </item>
+    </channel>
+</rss>

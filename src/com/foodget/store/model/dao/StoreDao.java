@@ -15,4 +15,7 @@ public interface StoreDao {
 	public StoreDto selectStore(int store_seq);
 	public void insertBlogRank(BlogRankInfoDto blogRankInfoDto);
 	public void insertBlogImage(BlogImgInfoDto blogImgInfoDto);
+	public int selectStoreSeq(int storeSeq);
+	public List<BlogRankInfoDto> selectBlog(int storeSeq);
+	public List<String> selectBlogImg(String blogUrl);
 }

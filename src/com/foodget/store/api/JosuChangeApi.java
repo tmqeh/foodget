@@ -36,7 +36,6 @@ public class JosuChangeApi {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-
 		URL url = null;
 		try {
 			url = new URL(apiUrl);

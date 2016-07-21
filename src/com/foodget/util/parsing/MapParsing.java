@@ -18,11 +18,13 @@ import com.foodget.store.api.JosuChangeApi;
 import com.foodget.store.blog.model.BlogDto;
 import com.foodget.store.blog.model.BlogImgInfoDto;
 import com.foodget.store.blog.model.BlogRankInfoDto;
+import com.foodget.utill.BlogRankScore;
 import com.foodget.utill.NumberCheck;
 import com.foodget.utill.StringMethod;
 
 public class MapParsing {
 	static int seq;
+	String logDate="";
 	static MapParsing mapParsing;
 	private String blogUrl;
 	private String title;
@@ -34,6 +36,15 @@ public class MapParsing {
 	private int imageCount;
 	private String BlogNumber;
 	private BlogDto blogDto;
+	private int socre_rank;
+
+	public int getSocre_rank() {
+		return socre_rank;
+	}
+
+	public void setSocre_rank(int socre_rank) {
+		this.socre_rank = socre_rank;
+	}
 
 	public BlogDto getBlogDto() {
 		return blogDto;
@@ -77,7 +88,7 @@ public class MapParsing {
 	public void setBlogRankInfo(String blogId, int commentCount, int lenthBody, int imageCount,String blogNumber) {
 		BlogRankInfoDto blogRankInfoDto = mapParsing.getBlogDto().getBlogRankInfoDto();
 		BlogDto blogDto = mapParsing.getBlogDto();
-		
+		int score=0;
 		String url = "http://blog.naver.com/"+blogId+"/"+blogNumber;
 		blogDto.setUrl(url);
 		blogRankInfoDto.setUrl(url);
@@ -87,16 +98,21 @@ public class MapParsing {
 		blogRankInfoDto.setComment_count(commentCount);
 		blogRankInfoDto.setBody_lenth(lenthBody);
 		blogRankInfoDto.setImage_count(imageCount);
-		blogDto.setBlog_number(blogNumber);
-		blogDto.setBlogRankInfoDto(blogRankInfoDto);
-		String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(mapParsing.getAddress()));
 		
+		score+=BlogRankScore.bodyLengthScore(lenthBody);
+		score+=commentCount*BlogRankScore.COMMENTSCORE;
+		score+=imageCount*BlogRankScore.IMAGESCORE;
+		
+		blogDto.setBlog_number(blogNumber);
+		blogDto.setRank_score(score);
+		
+		blogDto.setBlogRankInfoDto(blogRankInfoDto);
 		blogDto.setStore_name(mapParsing.getTitle());
 		blogDto.setOld_address(mapParsing.getAddress());
-		
+		String newAddress= StringMethod.getStringMethod().stringToken(JosuChangeApi.getNewAddres(mapParsing.getAddress()));
 		blogDto.setNew_address(newAddress);
 		blogDto.setSearchWord(newAddress+" "+mapParsing.getTitle());
-		blogDto.setStore_seq(seq++);
+		blogDto.setLog_time(mapParsing.getLogDate().trim());
 		mapParsing.setBlogDto(blogDto);
 	}
 
@@ -223,6 +239,14 @@ public class MapParsing {
 		mapParsing.getBlogdetailInfo(doc);
 		String mapSrc = "http://mashup.map.naver.com";
 		Elements contents = doc.select("iframe");
+		Elements contents2 = doc.select("span");
+		for(int i=0;i<contents2.size();i++){
+			Element content2 = contents2.get(i);
+			if("se_publishDate pcol2 fil5".equals(content2.className())){
+				mapParsing.setLogDate(content2.text());
+				break;
+			}
+		}
 		int contentSize = contents.size();
 		for (int i = 0; i < contentSize; i++) {
 			Element content = contents.get(i);
@@ -235,6 +259,14 @@ public class MapParsing {
 			}
 		}
 		return url;
+	}
+
+	public String getLogDate() {
+		return logDate;
+	}
+
+	public void setLogDate(String logDate) {
+		this.logDate = logDate;
 	}
 
 	public JSONObject getBusinessName(String src) {
@@ -379,15 +411,6 @@ public class MapParsing {
 		}
 		mapParsing.setImageCount(count);
 	}
-	public static void main(String args[]) {
-		// stringToTextFile(doc.select("body").toString());
-		// http://blog.naver.com/juhyun852/220745302061
-		String src = "http://yesican1.blog.me/220752560025";
-		mapParsing.startParsing(src);
-		// mapParsing.getDetailMenu(src);
-		// mapParsing.test(src);
-	}
-
 	public boolean startParsing(String url) {
 		String title = null;
 		String address = null;
@@ -426,7 +449,6 @@ public class MapParsing {
 		}
 		return flag;
 	}
-
 	public String getBlogUrl() {
 		return blogUrl;
 	}
