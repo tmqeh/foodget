@@ -214,7 +214,7 @@ function onClickMap(e){
 				<div class="row storepage_sub">
 					<div class="col-sm-4 storeimg_box">
 					
-	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}">장바구니</button>
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}" data-img="${slist.store_phone}">장바구니</button>
 		
 					
 						<img src="${root}/img/food1.JPG" class="storeimg">
@@ -453,6 +453,7 @@ var cookiecnt=2;
         //strHTML += "<caption> 테스트" + count + "</caption>";
         //strHTML += "<tr><td colspan='2'></td></tr>";
         strHTML += "<tr bgcolor='#E2E2E2' align='center'>";
+        strHTML += "<td style='width:25%' >사진</td>";
         strHTML += "<td style='width:25%' >상호명</td>";
         strHTML += "<td style='width:25%'>주소</td>";
         strHTML += "<td style='width:25%'>연락처</td>";
@@ -467,6 +468,7 @@ var cookiecnt=2;
         	
         	if(cart_final){
             strHTML += "<tr align='center'>";
+            strHTML += "<td> <img src =" + !!!!!!!!!!!!!!!!!!!!!!!! + "> </td>";
             strHTML += "<td>" + cart_final.name + "</td>";
             strHTML += "<td>" + cart_final.address + "</td>";
             strHTML += "<td>" + cart_final.phone +"</td>";
@@ -504,12 +506,13 @@ function gocart(){
 	 var name=document.getElementById('name').value;
 	 var address=document.getElementById('address').value;
 	 var phone=document.getElementById('phone').value;
-	 
+	 var img=document.getElementById('').value;
 	 
 		var contact = new Object();
 		contact.name = name;
 		contact.address = address;
 		contact.phone = phone;
+		contact.img = img;
 		
 		var jsonText = JSON.stringify(contact);
 		
