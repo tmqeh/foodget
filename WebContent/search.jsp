@@ -60,7 +60,7 @@ function get3857LonLat(coordX, coordY){
 function initialize(){
 	myX='14363856.085492350';
 	myY='4178405.946508492';
-	map = new Tmap.Map({div:'map_div', width:'1000px',height:document.documentElement.clientHeight-30+"px"});
+	map = new Tmap.Map({div:'map_div', width:'100%',height:'400px'});
 	map.setCenter(new Tmap.LonLat(myX, myY),15);
 
 	var lonlat = new Tmap.LonLat(myX, myY);
@@ -148,7 +148,6 @@ function onClickMap(e){
 								</div>
 												
 				</div>
-
 		  <div class="form-group">
 		    <label for="recipient-name" class="control-label">가게이름 :</label>
 		    <input type="text" class="modal-name" size="40" id="name">
@@ -164,6 +163,10 @@ function onClickMap(e){
 		   <div class="form-group">
 		    <label for="recipient-name" class="control-label">거리 :</label>
 		    <input type="text" class="modal-distance" size="40" id="distance">
+		  </div>
+		  <div class="form-group">
+		    <label for="recipient-name" class="control-label">좌표 :</label>
+		    <input type="text" class="modal-latitude" size="40" id="latitude">
 		  </div>
 		</form>
 	      </div>
@@ -218,10 +221,14 @@ function onClickMap(e){
 					<div class="col-sm-4 storeimg_box">
 					
 
-	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}"data-latitude="${slist.store_latitude}" data-longitude="${slist.store_longitude}" data-img="${slist.store_img}">장바구니</button>
-	
-					
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}"data-latitude="${slist.store_latitude}" data-longitude="${slist.store_longitude}">장바구니</button>
+		
+<c:if test="${slist.store_img == null}">			
 						<img src="${root}/img/food1.JPG" class="storeimg">
+</c:if>
+<c:if test="${slist.store_img != null}">					
+						<img src=${slist.store_img } class="storeimg">
+</c:if>						
 					</div>
 					<div class="col-sm-4">
 						<a href="javascript:viewStore('${slist.store_seq }');"><h2>${slist.store_name }</h2></a>
