@@ -139,6 +139,8 @@ function onClickMap(e){
 							<input type="hidden" id="sample2_postcode" placeholder="우편번호">
 							<input type="hidden" class="modal-latitude" id="latitude">
         					<input type="hidden" class="modal-longitude" id="longitude">
+        					<input type="hidden" class="modal-img" id="img">
+        					<input type="hidden" class="modal-distance" id="distance">
 
 								<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 								<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -218,9 +220,10 @@ function onClickMap(e){
 				<div class="row storepage_sub">
 					<div class="col-sm-4 storeimg_box">
 					
+
 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}"data-latitude="${slist.store_latitude}" data-longitude="${slist.store_longitude}">장바구니</button>
 		
-<c:if test="${slist.store_img == null}">					
+<c:if test="${slist.store_img == null}">			
 						<img src="${root}/img/food1.JPG" class="storeimg">
 </c:if>
 <c:if test="${slist.store_img != null}">					
@@ -414,6 +417,7 @@ $(document).ready(function() {
 		  var modal = $(this);
 		  var latitude = button.data('latitude');
 	      var longitude = button.data('longitude');
+	      var img = button.data('img');
 	        
 		  modal.find('.modal-title').text('자신의 위치를 정해주세요');
 		  modal.find('.modal-name').val(name);
@@ -421,6 +425,7 @@ $(document).ready(function() {
 		  modal.find('.modal-phone').val(phone);
 		  modal.find('.modal-latitude').val(latitude);
 	      modal.find('.modal-longitude').val(longitude);
+	      modal.find('.modal-img').val(img);
 		  
 	});
 });
@@ -467,6 +472,7 @@ var cookiecnt=2;
         //strHTML += "<caption> 테스트" + count + "</caption>";
         //strHTML += "<tr><td colspan='2'></td></tr>";
         strHTML += "<tr bgcolor='#E2E2E2' align='center'>";
+        strHTML += "<td style='width:25%' >사진</td>";
         strHTML += "<td style='width:25%' >상호명</td>";
         strHTML += "<td style='width:25%'>주소</td>";
         strHTML += "<td style='width:25%'>연락처</td>";
@@ -481,6 +487,7 @@ var cookiecnt=2;
         	
         	if(cart_final){
             strHTML += "<tr align='center'>";
+            //strHTML += "<td> <img src =" + cart_final.name + "> </td>";
             strHTML += "<td>" + cart_final.name + "</td>";
             strHTML += "<td>" + cart_final.address + "</td>";
             strHTML += "<td>" + cart_final.phone +"</td>";
@@ -518,12 +525,17 @@ function gocart(){
 	 var name=document.getElementById('name').value;
 	 var address=document.getElementById('address').value;
 	 var phone=document.getElementById('phone').value;
-	 
-	 
+	 var img=document.getElementById('img').value;
+	 var distance=document.getElementById('distance').value;
+
+	
+	 	
 		var contact = new Object();
 		contact.name = name;
 		contact.address = address;
 		contact.phone = phone;
+		contact.img = img;
+		contact.distance = distance;
 		
 		var jsonText = JSON.stringify(contact);
 		
