@@ -61,7 +61,7 @@ function get3857LonLat(coordX, coordY){
 function initialize(){
 	myX='14363856.085492350';
 	myY='4178405.946508492';
-	map = new Tmap.Map({div:'map_div', width:'100%',height:document.documentElement.clientHeight-30+"px"});
+	map = new Tmap.Map({div:'map_div', width:'1000px',height:document.documentElement.clientHeight-30+"px"});
 	map.setCenter(new Tmap.LonLat(myX, myY),15);
 
 	var lonlat = new Tmap.LonLat(myX, myY);

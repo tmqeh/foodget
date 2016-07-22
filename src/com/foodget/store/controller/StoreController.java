@@ -23,6 +23,7 @@ import com.foodget.store.blog.model.BlogRankInfoDto;
 import com.foodget.store.blog.model.SearchDto;
 import com.foodget.store.model.StoreDto;
 import com.foodget.util.parsing.MapParsing;
+import com.foodget.utill.ApiTest;
 import com.foodget.utill.Encoder;
 import com.foodget.utill.StringMethod;
 import com.foodget.store.service.StoreService;
