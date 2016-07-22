@@ -14,6 +14,8 @@ var marker;
 var clickX;
 var clickY;
 var markerLayer;
+
+
 function initialize(myX,myY){
 	userX=myX;
 	userY=myY
@@ -26,6 +28,7 @@ function initialize(myX,myY){
 	var lonlat = new Tmap.LonLat(myX, myY);
 	 
 	size = new Tmap.Size(24,38);
+
 	offset = new Tmap.Pixel(-(size.w/2), -(size.h/2));
 	icon = new Tmap.Icon('https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png', size, offset); 
 	
@@ -38,6 +41,9 @@ function initialize(myX,myY){
 	setLayers();
 	map.events.register("click", map, onClickMap); 
 }
+
+
+
 function getRouteData(startX,startY,endX,endY){
 	if(clickX!=null){
 		startX =clickX;

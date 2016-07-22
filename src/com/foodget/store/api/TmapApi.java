@@ -28,24 +28,15 @@ public class TmapApi {
 	public static TmapApi getTmapApi() {
 		return tmapApi;
 	}
-	public static void main(String[] args) {
-//		System.out.println(StringMethod.getStringMethod().StringToKm(new TmapApi().getDistance("","","","")));
-//		System.out.println(StringMethod.getStringMethod().StringToKm("1111"));
-		tmapApi.locationChange("","");
-	}
 	public String getDistance(String endX, String endY, String startX, String startY){
-		System.setProperty("jsse.enableSNIExtension", "false") ; 
+		System.setProperty("jsse.enableSNIExtension", "false"); 
 		String jsonStr="";
 		HttpResponse res = null;
-		endX="14363856.085492350";
-		endY="4178405.946508492";
-		startX="14135591.321772";
-		startY="4518111.822511";
-//		String endX="35.3447730";
-//		String endY="129.0199550";
-//		String startX="37.376385";
-//		String startY="126.635564";
-		String url = "https://apis.skplanetx.com/tmap/routes?version=1&endX="+endX+"&endY="+endY+"&startX="+startX+"&startY="+startY+"";
+//		endX="14363856.085492350";
+//		endY="4178405.946508492";
+//		startX="14135591.321772";
+//		startY="4518111.822511";
+		String url = "https://apis.skplanetx.com/tmap/routes?version=1&endX="+endX+"&endY="+endY+"&startX="+startX+"&startY="+startY;
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet req = new HttpGet(url);// reqest 占쏙옙체
 		req.addHeader("Host", "apis.skplanetx.com");
@@ -129,7 +120,9 @@ public class TmapApi {
 		}
 		jsonStr = sb.toString();
 		System.out.println(jsonStr);
-		
 		return null;
+	}
+	public static void main(String[] args) {
+		tmapApi.getDistance("","","","");
 	}
 }

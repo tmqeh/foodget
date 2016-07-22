@@ -13,6 +13,16 @@ public class StoreDto {
 	private int clean_taste;
 	private int sweet_taste;
 	private int fresh_taste;
+	private String store_img;
+	
+	public String getStore_img() {
+		return store_img;
+	}
+
+	public void setStore_img(String store_img) {
+		this.store_img = store_img;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreDto [store_seq=" + store_seq + ", store_name=" + store_name + ", store_address=" + store_address
