@@ -17,8 +17,17 @@
         </div>
         
        	<div class="col-sm-6 searchbar">
-          <input id="keyword" name="keyword" type="text" class="search col-sm-10"  placeholder="예 : 구로디지털단지 김치찌개">
-          	<a id="searchbtn" class="search-btn col-sm-2"><img src="${root}/img/search.png" style="height:25px"></a>	                
+			<div class="col-sm-12 row">
+				<div class="col-xs-10 row">
+                	<input type="text" id="keyword" name="keyword" class="search"  placeholder="예 : 구로디지털단지 김치찌개" onkeydown="javascript:startsearch();" value="" >
+	                <div class="autosearch" id="autosearch">
+	                	<div id="searchList"></div>
+	                </div>
+                </div>
+                <div class="col-xs-2">
+               		<a id="searchbtn" class="search-btn"><img src="${root}/img/search.png" style="height:25px"></a>
+               	</div>	                
+            </div>                
 		</div>
 		</form>
 

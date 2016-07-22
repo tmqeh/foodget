@@ -386,13 +386,9 @@ var bounds = new daum.maps.LatLngBounds();
 
 <c:forEach var="slist" items="${slist }">
 <script>
-function hojin(){
-	  // 마커를 생성하고 지도에 표시합니다
     placePosition = new daum.maps.LatLng("${slist.store_latitude}", "${slist.store_longitude}");
     marker = addMarker(placePosition, "${slist.store_name}"); 
     bounds.extend(placePosition);
-}
-  
 </script>
 </c:forEach>
 
