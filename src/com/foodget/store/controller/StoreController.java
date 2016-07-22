@@ -31,7 +31,9 @@ import com.foodget.store.service.StoreService;
 @Controller
 @RequestMapping("/store")
 public class StoreController {
-	
+	static{
+		System.setProperty("jsse.enableSNIExtension", "false") ; 
+	}
 	private StoreService storeService;
 	
 	private List<SearchDto> searchlist;
@@ -103,13 +105,14 @@ public class StoreController {
 		return mav;
 	}
 	@RequestMapping(value="tmapdistance.html")
-	public ModelAndView tmapdistance(@RequestParam("endX") String endX,@RequestParam("endY") String endY,@RequestParam("startX") String startX,@RequestParam("startY") String startY )
+	public void tmapdistance(@RequestParam("endX") String endX,@RequestParam("endY") String endY,@RequestParam("startX") String startX,@RequestParam("startY") String startY,HttpServletResponse response )
 	{
-		ModelAndView mav = new ModelAndView();
 		String distance = TmapApi.getTmapApi().getDistance(endX, endY, startX, startY);
-		mav.addObject("distance", distance);
-		mav.setViewName("/hojin_Test/viewImg");
-		return mav;
+		try {
+			response.getWriter().print(distance);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	@RequestMapping(value="getroot.html")
 	public void getRoot(@RequestParam("apikey") String apikey,@RequestParam("q") String q,@RequestParam("output") String output,HttpServletResponse response)
@@ -120,17 +123,11 @@ public class StoreController {
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
-		
 		String json=ApiTest.getApiTest().addressToLocation(apikey, q);
-		
-//		String distance = TmapApi.getTmapApi().locationChange("", "");
 		try {
 			response.getWriter().print(json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

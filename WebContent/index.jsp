@@ -18,7 +18,6 @@ function startsearch() {
    if(document.getElementById("keyword").value == "") {
       checkFirst = false;
    }
-
    if(checkFirst == false) {
       firstKey = "first";
       loopSendKeyoword = true;

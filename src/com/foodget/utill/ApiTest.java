@@ -71,8 +71,6 @@ public class ApiTest {
 		JSONObject j = StringMethod.getStringMethod().stringToJson(data);
 		JSONObject j2 =StringMethod.getStringMethod().stringToJson(j.get("channel").toString());
 		JSONObject j3 =StringMethod.getStringMethod().stringToJson(j2.get("item").toString().replace("[", "").replace("]", ""));
-		System.out.println(j3.get("point_x"));
-		System.out.println(j3.get("point_y"));
 		json = "{\"point_x\":\""+j3.get("point_x")+"\", \"point_y\":\""+j3.get("point_y")+"\"}";
 //		System.out.println(j2.get("newAddress"));
 		return json;
