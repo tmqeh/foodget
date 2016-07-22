@@ -36,8 +36,8 @@ function sendkeyword() {
    if(keyword == "") {
       checkFirst = false;
       lastkeyword = "";
-      hide("search");
-   } else if(keyword != lastkeyword) {
+      $("#autosearch").hide();
+	} else if(keyword != lastkeyword) {
       lastkeyword = keyword;
       if(lastkeyword != "") {
          $.ajax({
@@ -50,7 +50,7 @@ function sendkeyword() {
             }
          });
       } else {
-         hide("search");
+         $("#autosearch").hide();
       }
    }
    window.setTimeout("sendkeyword();", 50);
@@ -65,10 +65,10 @@ function showKeyword(data) {
       }
       var sl = document.getElementById("searchList");
       sl.innerHTML = result;
-      show("search");
+      $("#autosearch").show();
    } else {
-      hide("search");
-   }   
+	  $("#autosearch").hide();
+	}   
 }
 function selectkeyword(keyword){
     document.getElementById("keyword").value=keyword;
@@ -85,6 +85,7 @@ function hide(elementid) {
    var element = document.getElementById(elementid);
    if(element)
       element.style.display = "none";
+    $("#autosearch").hide();
 }
 </script>
 
@@ -96,14 +97,23 @@ function hide(elementid) {
 	        <div class="header-content">
 	            <div class="header-content-inner row">
 	                <img src="${root}/img/logo-main.png"><hr>
-					<div class="row">
-						<div class="col-sm-2"></div>
-		                <input type="text" id="keyword" name="keyword" class="search col-sm-5"  placeholder="예 : 구로디지털단지 김치찌개" onkeydown="javascript:startsearch();" value="" >
-		                <div class="search">
-		                	<div id="searchList"></div>
+					<div class="row searchbar">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-7 row">
+							<div class="col-xs-10 row">
+			                	<input type="text" id="keyword" name="keyword" class="search"  placeholder="예 : 구로디지털단지 김치찌개" onkeydown="javascript:startsearch();" value="" >
+				                <div class="autosearch" id="autosearch">
+				                	<div id="searchList"></div>
+				                </div>
+			                </div>
+			                <div class="col-xs-2">
+			               		<a id="searchbtn" class="search-btn"><img src="${root}/img/search.png" style="height:25px"></a>
+			               	</div>	                
+			            </div>
+			            
+			            <div class="col-sm-3 row">
+			                <div class="col-xs-12 keyword-rank">실시간 검색어</div>
 		                </div>
-		                <a id="searchbtn" class="search-btn col-sm-1"><img src="${root}/img/search.png" style="height:25px"></a>	                
-		                <div class="col-sm-2 keyword-rank">실시간 검색어</div>
 		                <div class="col-sm-1"></div>
 	                </div>                  
 	            </div>
