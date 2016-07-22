@@ -208,13 +208,16 @@
     font-weight: bold;
     font-size: 15px;
     border: 0px;
+    width:100%;
 }
 
 .search-btn {
-	height: 31px;
+    display: block;
+    height: 31px;
     background-color: #03a9f4;
-    padding: 3px;
     cursor: pointer;
+    width: 100%;
+    padding-top: 3px;
 }
 
 .search-btn:hover{
@@ -355,6 +358,16 @@ border: 1px solid;
     padding: 0px;
     padding-top: 15px;
     text-align: center;
+}
+
+.searchbar .col-xs-2 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.searchbar .col-xs-10 {
+    padding: 0px;
+    margin: 0px;
 }
 
 .scrollbtn {
@@ -596,4 +609,14 @@ border: 1px solid;
     border-radius: 50%;
     border: 5px solid #dce0e0;
     display: inline-block;
+}
+
+.autosearch {
+    background-color: white;
+    text-align: left;
+    border: 1px solid #dce0e0;
+}
+
+.autosearch a {
+   color:#484848 
 }

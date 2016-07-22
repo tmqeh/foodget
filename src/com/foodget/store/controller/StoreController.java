@@ -23,6 +23,7 @@ import com.foodget.store.blog.model.BlogRankInfoDto;
 import com.foodget.store.blog.model.SearchDto;
 import com.foodget.store.model.StoreDto;
 import com.foodget.util.parsing.MapParsing;
+import com.foodget.utill.ApiTest;
 import com.foodget.utill.Encoder;
 import com.foodget.utill.StringMethod;
 import com.foodget.store.service.StoreService;
@@ -61,14 +62,13 @@ public class StoreController {
 	public @ResponseBody String storesearch(@RequestParam("keyword")String keyword, @RequestParam("first")String first) {
 		JSONObject json = new JSONObject();
 		JSONArray jsonarr = new JSONArray();
+		System.out.println(keyword);
 		
 		if("first".equals(first)) {
 			searchlist = storeService.getSearchList(keyword);
-			System.out.println("크기" + searchlist.size());
 			for(SearchDto searchdto : searchlist) {
 				JSONObject jo = new JSONObject();
 				jo.put("keyword", searchdto.getKeyword());
-				System.out.println(jo.get("keyword"));
 				jsonarr.add(jo);
 			}
 		} else {
@@ -78,7 +78,6 @@ public class StoreController {
 				if(str.toUpperCase().startsWith(keyword.toUpperCase())) {
 					JSONObject jo = new JSONObject();
 					jo.put("keyword", searchdto.getKeyword());
-					System.out.println("else " + jo.get("keyword"));
 					jsonarr.add(jo);
 				}
 			}
