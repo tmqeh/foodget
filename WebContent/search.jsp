@@ -50,6 +50,7 @@
 <script src="${root}/js/api/Tmap.js"></script>
 <script language="javascript" src="https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=5064adfe-57cd-35d4-b5dd-3d46c557ad0e"></script>
 <script>
+var getDistance;
 var markers;
 var map;
 var marker;
@@ -118,6 +119,7 @@ function getRoot(myLocation,endX,endY){
                 url:root+'/store/tmapdistance.html?endX='+endX+'&endY='+endY+'&startX='+starXY.lon+'&startY='+starXY.lat+'',
                 success:function(data){
                 	document.getElementById('distance').value = data;
+                	getDistance = data;
                 	selectMyAddress(starXY.lon,starXY.lat);
                 	getRouteData2(starXY.lon,starXY.lat,endX,endY);
                 }
@@ -485,7 +487,7 @@ var cookiecnt=2;
             strHTML += "<td>" + cart_final.name + "</td>";
             strHTML += "<td>" + cart_final.address + "</td>";
             strHTML += "<td>" + cart_final.phone +"</td>";
-            strHTML += "<td>여기다거리값넣기</td>";
+            strHTML += "<td>"+ cart_final.distance+"</td>";
             strHTML += "</tr>";
       	  }
         }
@@ -519,12 +521,12 @@ function gocart(){
 	 var name=document.getElementById('name').value;
 	 var address=document.getElementById('address').value;
 	 var phone=document.getElementById('phone').value;
-	 
-	 
-		var contact = new Object();
+	 var distance = document.getElementById('distance').value;
+	 var contact = new Object();
 		contact.name = name;
 		contact.address = address;
 		contact.phone = phone;
+		contact.distance = distance;
 		
 		var jsonText = JSON.stringify(contact);
 		

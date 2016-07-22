@@ -152,7 +152,25 @@ public class StringMethod {
 	}
 
 	public String cutThatDong(String str) {
-		str = str.replace("-", "");
+		StringTokenizer strToken = new StringTokenizer(str, " ");
+		int count = strToken.countTokens();
+		for (int i = 0; i < count; i++) {
+			String tokenItem = strToken.nextToken();
+			if (stringMethod.lastCharNumberCheck(tokenItem)) {
+				if (strToken.hasMoreTokens()) {
+					while (strToken.hasMoreTokens()) {
+						tokenItem = strToken.nextToken();
+						str = str.replace(tokenItem, "");
+					}
+				} else {
+					str = str.replace(tokenItem, "");
+				}
+				break;
+			}
+		}
+		return str;
+	}
+	public String cutThatDong2(String str) {
 		StringTokenizer strToken = new StringTokenizer(str, " ");
 		int count = strToken.countTokens();
 		for (int i = 0; i < count; i++) {
@@ -197,5 +215,8 @@ public class StringMethod {
 			}
 		}
 		return value;
+	}
+	public static void main(String[] args) {
+		System.out.println(stringMethod.cutThatDong("삼선동 3가 90-3 아파트"));
 	}
 }

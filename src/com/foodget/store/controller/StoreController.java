@@ -51,7 +51,6 @@ public class StoreController {
 		mav.setViewName("/search");		
 		return mav;
 	}
-
 	@RequestMapping(value="/storeInfo.html", method=RequestMethod.POST)
 	public ModelAndView storeInfo(@RequestParam("store_seq")int store_seq) {
 		ModelAndView mav = new ModelAndView();

@@ -36,7 +36,7 @@ public class NaverApi {
 		String clientId = "vFmv_WyXnF1xS_8ZmKoW";
 		String clientSecret = "GGraX8OAa8";
 		query = Encoder.eucUrl(query);
-		int display=100;
+		int display=20;
 		String url = "https://openapi.naver.com/v1/search/blog.xml?query=" + query + "&display="+display+"&start=1&sort=sim";
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet req = new HttpGet(url);// reqest 占쏙옙체
