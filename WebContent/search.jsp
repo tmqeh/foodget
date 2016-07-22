@@ -36,16 +36,22 @@
 }
     </style>
 
-
 <html>
 <head>
+<%@ include file="/common/common.jsp"%>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>푸드득 FoodGet</title>
 <script src="${root}/js/api/Tmap.js"></script>
 <script language="javascript" src="https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=5064adfe-57cd-35d4-b5dd-3d46c557ad0e"></script>
 <script>
 var markers;
 var map;
-var kmlLayer;
-var kmlForm;
 var marker;
 var size;
 var offset;
@@ -72,7 +78,7 @@ function initialize(){
 	marker = new Tmap.Marker(lonlat, icon);
 	markers.addMarker(marker);
 	map.events.register("click", map, onClickMap); 
-	
+	setLayers();
 }
 window.onload = function() {
     initialize();
@@ -90,17 +96,37 @@ function onClickMap(e){
     
     alert(lonlat); 
 } 
+function selectMyAddress(myX,myY){
+	if(markers !=null){
+		markers.destroy();
+	}
+    markers = new Tmap.Layer.Markers( "MarkerLayer" );
+    map.addLayer(markers);
+    var marker = new Tmap.Marker(new Tmap.LonLat(myX, myY), icon);
+    markers.addMarker(marker);
+    map.setCenter(new Tmap.LonLat(myX, myY),15);
+}
+function getRoot(myLocation,endX,endY){
+    $.ajax({
+    	type : "post",
+        url:root+'/store/getroot.html?apikey=57a86a7ab2ca08b43de7cb6d40fdd2ca&q='+myLocation+'&output=json',
+        success:function(data){
+        	var json = JSON.parse(data);
+        	var starXY  = get3857LonLat(json.point_x,json.point_y);
+        	$.ajax({
+            	type : "post",
+                url:root+'/store/tmapdistance.html?endX='+endX+'&endY='+endY+'&startX='+starXY.lon+'&startY='+starXY.lat+'',
+                success:function(data){
+                	document.getElementById('distance').value = data;
+                	selectMyAddress(starXY.lon,starXY.lat);
+                	getRouteData2(starXY.lon,starXY.lat,endX,endY);
+                }
+            })
+        }
+    })
+//	alert(myLocation);
+}
 </script>
-<%@ include file="/common/common.jsp"%>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>푸드득 FoodGet</title>
-
 </head>	
 
 <body id="page-top">
@@ -243,29 +269,11 @@ function onClickMap(e){
 		<input type="hidden" id="store_seq"  name="store_seq" value="">
 	</form>
 </div>
-
 <script src="${root}/js/jquery.cookie.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 //hojin
-function getRoot(myLocation,endX,endY){
-    $.ajax({
-    	type : "post",
-        url:root+'/store/getroot.html?apikey=57a86a7ab2ca08b43de7cb6d40fdd2ca&q='+myLocation+'&output=json',
-        success:function(data){
-        	var json = JSON.parse(data);
-        	var starXY  = get3857LonLat(json.point_x,json.point_y);
-        	$.ajax({
-            	type : "post",
-                url:root+'/store/tmapdistance.html?endX='+endX+'&endY='+endY+'&startX='+starXY.lon+'&startY='+starXY.lat+'',
-                success:function(data){
-                	document.getElementById('distance').value = data;
-                }
-            })
-        }
-    })
-//	alert(myLocation);
-}
+
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
     function closeDaumPostcode() {
@@ -302,7 +310,6 @@ function getRoot(myLocation,endX,endY){
             	//이호진 작업 시작
             	var endXY  = get3857LonLat(document.getElementById('longitude').value ,document.getElementById('latitude').value );
             	getRoot(fullAddr,endXY.lon,endXY.lat);
-            	
             	
                 document.getElementById('sample2_addressEnglish').value = data.addressEnglish;
                 // iframe을 넣은 element를 안보이게 한다.
@@ -379,13 +386,10 @@ var bounds = new daum.maps.LatLngBounds();
 
 <c:forEach var="slist" items="${slist }">
 <script>
-function hojin(){
 	  // 마커를 생성하고 지도에 표시합니다
     placePosition = new daum.maps.LatLng("${slist.store_latitude}", "${slist.store_longitude}");
     marker = addMarker(placePosition, "${slist.store_name}"); 
     bounds.extend(placePosition);
-}
-  
 </script>
 </c:forEach>
 

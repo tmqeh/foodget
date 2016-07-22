@@ -34,6 +34,7 @@ public class StoreController {
 	static{
 		System.setProperty("jsse.enableSNIExtension", "false") ; 
 	}
+	
 	private StoreService storeService;
 	
 	private List<SearchDto> searchlist;
@@ -59,7 +60,6 @@ public class StoreController {
 		mav.setViewName("/store/storeinfo");
 		return mav;
 	}
-	
 	@RequestMapping(value="/autoSearch.html", method=RequestMethod.POST)
 	public @ResponseBody String storesearch(@RequestParam("keyword")String keyword, @RequestParam("first")String first) {
 		JSONObject json = new JSONObject();

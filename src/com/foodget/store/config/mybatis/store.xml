@@ -119,4 +119,9 @@
         from BLOG_IMAGE
         where URL = #{blogUrl}
     </select>
+    
+    <update id="updateStoreImg" parameterType="sdto">
+        update store set store_img=#{store_img}
+        where store_seq = #{store_seq}
+    </update>
 </mapper>

@@ -21,4 +21,5 @@ public interface StoreDao {
 	public int selectStoreSeq(int storeSeq);
 	public List<BlogRankInfoDto> selectBlog(int storeSeq);
 	public List<String> selectBlogImg(String blogUrl);
+	public void updateStoreImg(StoreDto storeDto);
 }

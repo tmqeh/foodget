@@ -151,6 +151,9 @@ public class StoreServiceImpl implements StoreService {
 			blogRankInfoDto.setBlogImgInfoDto(blogImgInfoDto);
 			blogRankList.add(blogRankInfoDto);
 		}
+		String imgUrl =blogRankList.get(0).getBlogImgInfoDto().getImgSrcList().get(0);
+		storeDto.setStore_img(imgUrl);
+		storeDao.updateStoreImg(storeDto);
 		return blogRankList;
 	}
 }

@@ -47,7 +47,6 @@ public class StoreDaoImpl implements StoreDao {
 	public StoreDto selectStore(int store_seq) {
 		return sqlSession.selectOne("com.foodget.store.model.dao.StoreDaoImpl.storeInfo",store_seq);
 	}
-
 	@Override
 	public void insertBlogRank(BlogRankInfoDto blogRankInfoDto) {
 		sqlSession.insert("com.foodget.store.model.dao.StoreDaoImpl.insertBlogRank", blogRankInfoDto);	
@@ -81,5 +80,11 @@ public class StoreDaoImpl implements StoreDao {
 	public List<String> selectBlogImg(String blogUrl) {
 		return sqlSession.selectList("com.foodget.store.model.dao.StoreDaoImpl.selectBlogImg", blogUrl);
 	}
+
+	@Override
+	public void updateStoreImg(StoreDto storeDto) {
+		sqlSession.selectList("com.foodget.store.model.dao.StoreDaoImpl.updateStoreImg", storeDto);
+	}
+
 
 }

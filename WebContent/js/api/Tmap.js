@@ -15,8 +15,7 @@ var clickX;
 var clickY;
 var markerLayer;
 
-
-function initialize(myX,myY){
+function initialize2(myX,myY){
 	userX=myX;
 	userY=myY
 	console.log(myX);
@@ -42,9 +41,7 @@ function initialize(myX,myY){
 	map.events.register("click", map, onClickMap); 
 }
 
-
-
-function getRouteData(startX,startY,endX,endY){
+function getRouteData2(startX,startY,endX,endY){
 	if(clickX!=null){
 		startX =clickX;
 		startY =clickY;

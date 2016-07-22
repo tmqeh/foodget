@@ -81,7 +81,6 @@ function show(elementid) {
    if(element)
       element.style.display = "";
 }
-
 function hide(elementid) {
    var element = document.getElementById(elementid);
    if(element)
