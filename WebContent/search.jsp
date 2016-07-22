@@ -54,7 +54,6 @@ var icon;
 var pr_3857 = new Tmap.Projection("EPSG:3857");
 //pr_4326 인스탄스 생성.
 var pr_4326 = new Tmap.Projection("EPSG:4326");
-
 function get3857LonLat(coordX, coordY){
     return new Tmap.LonLat(coordX, coordY).transform(pr_4326, pr_3857);
 }
@@ -138,6 +137,8 @@ function onClickMap(e){
 							<input type="text" id="sample2_address" size="40px" placeholder="한글주소">
 							<input type="hidden" id="sample2_addressEnglish" placeholder="영문주소">
 							<input type="hidden" id="sample2_postcode" placeholder="우편번호">
+							<input type="hidden" class="modal-latitude" id="latitude">
+        					<input type="hidden" class="modal-longitude" id="longitude">
 
 								<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 								<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -214,7 +215,7 @@ function onClickMap(e){
 				<div class="row storepage_sub">
 					<div class="col-sm-4 storeimg_box">
 					
-	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}">장바구니</button>
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-name="${slist.store_name }" data-address="${slist.store_address }" data-phone="${slist.store_phone}"data-latitude="${slist.store_latitude}" data-longitude="${slist.store_longitude}">장바구니</button>
 		
 					
 						<img src="${root}/img/food1.JPG" class="storeimg">
@@ -247,28 +248,30 @@ function onClickMap(e){
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 //hojin
-function getRoot(myLocation){
+function getRoot(myLocation,endX,endY){
     $.ajax({
     	type : "post",
         url:root+'/store/getroot.html?apikey=57a86a7ab2ca08b43de7cb6d40fdd2ca&q='+myLocation+'&output=json',
         success:function(data){
-        	alert("성공");
         	var json = JSON.parse(data);
         	var starXY  = get3857LonLat(json.point_x,json.point_y);
-        	alert(starXY.lon);
-        	alert(starXY.lat);
+        	$.ajax({
+            	type : "post",
+                url:root+'/store/tmapdistance.html?endX='+endX+'&endY='+endY+'&startX='+starXY.lon+'&startY='+starXY.lat+'',
+                success:function(data){
+                	document.getElementById('distance').value = data;
+                }
+            })
         }
     })
 //	alert(myLocation);
 }
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
-
     function closeDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_layer.style.display = 'none';
     }
-
     function sample2_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -297,7 +300,10 @@ function getRoot(myLocation){
                 document.getElementById('sample2_postcode').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('sample2_address').value = fullAddr;
             	//이호진 작업 시작
-            	getRoot(fullAddr);
+            	var endXY  = get3857LonLat(document.getElementById('longitude').value ,document.getElementById('latitude').value );
+            	getRoot(fullAddr,endXY.lon,endXY.lat);
+            	
+            	
                 document.getElementById('sample2_addressEnglish').value = data.addressEnglish;
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
@@ -403,10 +409,15 @@ $(document).ready(function() {
 		  var address = button.data('address');
 		  var phone = button.data('phone');
 		  var modal = $(this);
+		  var latitude = button.data('latitude');
+	      var longitude = button.data('longitude');
+	        
 		  modal.find('.modal-title').text('자신의 위치를 정해주세요');
 		  modal.find('.modal-name').val(name);
 		  modal.find('.modal-address').val(address);
 		  modal.find('.modal-phone').val(phone);
+		  modal.find('.modal-latitude').val(latitude);
+	      modal.find('.modal-longitude').val(longitude);
 		  
 	});
 });
